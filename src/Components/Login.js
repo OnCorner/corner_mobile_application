@@ -11,6 +11,7 @@ import {
 
 import Home from './Home'
 import Register from './Register'
+// import InputNormal from '../Elements/InputNormal.js'
 
 class Login extends Component {
   _navigate(type='Normal'){
@@ -34,17 +35,24 @@ class Login extends Component {
     return (
       <View style={styles.container}>
         <Text style={{color: 'black'}}> Corner </Text>
-
-        <TextInput style ={{height:14}} placeholderTextColor='black'placeholder='Username'/>
-
-        <TextInput style ={{height:14}} placeholderTextColor='black'placeholder='Password'/>
-
+        <InputNormal
+          color="black"
+          style={{height:14}}
+          placeholderTextColor='black'
+          placeholder='Username'
+        />
+        <TextInput
+          style={{height:14}}
+          placeholderTextColor='black'
+          placeholder='Password'
+        />
         <TouchableHighlight onPress={()=>this._navigate()}>
-          <Text style={{color: 'black'}}> Login </Text>
+          <Text style={{color: 'black'}}>Login</Text>
         </TouchableHighlight>
-
-        <TouchableHighlight onPress={()=>this._navigateRegister()}>
-          <Text style={{color: 'black'}}> Register </Text>
+        <TouchableHighlight
+          onPress={()=>this._navigateRegister()}
+        >
+          <Text style={{color: 'black'}}>Register</Text>
         </TouchableHighlight>
       </View>
     );

@@ -28,8 +28,9 @@ class RightSwipeView extends Component {
           <Text>${this.props.rowData.price}</Text>
         </View>
         <View>
-          <TouchableHighlight underlayColor='#dddddd'
-          onPress={this._contactPressed.bind(this)}
+          <TouchableHighlight
+            underlayColor='#dddddd'
+            onPress={this._contactPressed.bind(this)}
           >
             <Text>Contact</Text>
           </TouchableHighlight>

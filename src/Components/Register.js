@@ -24,14 +24,23 @@ class Register extends Component {
     return (
       <View style={styles.container}>
         <View style={{marginTop: 60, marginLeft: 15}}>
-          <TextInput style ={{height:14}} placeholderTextColor='black'placeholder='Username'/>
-
-          <TextInput style ={{height:14}} placeholderTextColor='black'placeholder='Email'/>
-
-          <TextInput style ={{height:14}} placeholderTextColor='black'placeholder='Password'/>
-
+          <TextInput
+            style ={{height:14}}
+            placeholderTextColor='black'
+            placeholder='Username'
+          />
+          <TextInput
+            style ={{height:14}}
+            placeholderTextColor='black'
+            placeholder='Email'
+          />
+          <TextInput
+            style ={{height:14}}
+            placeholderTextColor='black'
+            placeholder='Password'
+          />
           <TouchableHighlight onPress={()=>this._navigate()}>
-            <Text style={{color: 'black'}}> Continue </Text>
+            <Text style={{color: 'black'}}>Continue</Text>
           </TouchableHighlight>
         </View>
         <View style={{marginBottom: 15, marginLeft: 15}}>
@@ -40,7 +49,6 @@ class Register extends Component {
           <Text>our terms of service and</Text>
           <Text>private policy</Text>
         </View>
-
       </View>
     );
   }

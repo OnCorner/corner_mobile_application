@@ -11,7 +11,7 @@ class DrawerPanel extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text> This is tha drawer </Text>
+        <Text>This is tha drawer</Text>
       </View>
     );
   }

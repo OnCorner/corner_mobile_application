@@ -14,7 +14,7 @@ class Home extends Component {
     console.log(this.props)
     return (
       <View style={styles.container}>
-        <FeedView navigator={this.props.navigator}/>
+        <FeedView navigator={this.props.navigator} />
       </View>
     );
   }

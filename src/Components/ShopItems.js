@@ -38,7 +38,10 @@ class ShopItems extends Component {
       <View style={styles.item}>
         <TouchableHighlight underlayColor='transparent'>
           <View>
-            <Image source={rowData.image} style={styles.groupImage}/>
+            <Image
+              source={rowData.image}
+              style={styles.groupImage}
+            />
             <Text>{rowData.style}</Text>
             <Text>${rowData.price}</Text>
           </View>
@@ -49,7 +52,10 @@ class ShopItems extends Component {
 
   render() {
     return (
-      <ListView contentContainerStyle={styles.list} dataSource={this.state.dataSource} renderRow={this._renderRow}
+      <ListView
+        contentContainerStyle={styles.list}
+        dataSource={this.state.dataSource}
+        renderRow={this._renderRow}
       />
     );
   }

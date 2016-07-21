@@ -38,7 +38,7 @@ class Interest extends Component {
 
   _renderRow(rowData){
     return (
-      <InterestCell rowData={rowData}/>
+      <InterestCell rowData={rowData} />
     )
   }
 
@@ -58,18 +58,21 @@ class Interest extends Component {
             Select 3 groups from our suggestions to kick off!
           </Text>
           <Text/>
-            <TouchableHighlight onPress={()=>this._goPressed()} style={{width:27}} underlayColor='transparent'>
-                <Text style={styles.goButton}>
-                  Go!
-                </Text>
+            <TouchableHighlight
+              onPress={()=>this._goPressed()}
+              style={{width:27}}
+              underlayColor='transparent'
+            >
+              <Text style={styles.goButton}>Go!</Text>
             </TouchableHighlight>
           <Text/>
-          <Text style={styles.subTitleText}>
-            Featured
-          </Text>
+          <Text style={styles.subTitleText}>Featured</Text>
         </View>
 
-        <ListView contentContainerStyle={styles.list} dataSource={this.state.dataSource} renderRow={this._renderRow}
+        <ListView
+          contentContainerStyle={styles.list}
+          dataSource={this.state.dataSource}
+          renderRow={this._renderRow}
         />
       </View>
     );

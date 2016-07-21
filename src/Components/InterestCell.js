@@ -23,12 +23,17 @@ class InterestCell extends Component {
     return (
       <View style={this.state.selected ? styles.transItem : styles.opacItem}>
         <TouchableHighlight
-          onPress={ () => { this.setState({selected: !this.state.selected})}} underlayColor='transparent'>
+          onPress={() => { this.setState({selected: !this.state.selected})}}
+          underlayColor='transparent'
+        >
           <View>
             <Image source={rowData.image} style={styles.groupImage}>
-              {this.state.selected ?              <View style={styles.selectedView}>
-                <Text style={styles.selectedText}>Selected</Text>
-              </View> : null
+              {this.state.selected ?
+                <View style={styles.selectedView}>
+                  <Text style={styles.selectedText}>Selected</Text>
+                </View>
+                :
+                null
               }
             </Image>
             <Text>{rowData.brand}</Text>

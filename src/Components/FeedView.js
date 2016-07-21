@@ -87,7 +87,9 @@ class FeedView extends Component {
 
   render() {
     return (
-      <ListView dataSource={this.state.dataSource} renderRow={this.renderRow.bind(this)}
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={this.renderRow.bind(this)}
       />
     );
   }

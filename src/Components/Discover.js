@@ -48,14 +48,15 @@ class Discover extends Component {
         <View style={{padding: 15}}>
           <View style={styles.rowContainer}>
             <View>
-              <Image source={require('../img/deleteIcon.png')}
-              style={styles.deleteButton}/>
+              <Image
+                source={require('../img/deleteIcon.png')}
+                style={styles.deleteButton}
+              />
             </View>
             <View>
               <Text>Follow</Text>
             </View>
           </View>
-
           <Image
             source={rowData.image}
             style={styles.groupThumb}
@@ -76,7 +77,7 @@ class Discover extends Component {
             </View>
           </View>
         </View>
-        <View style={styles.separator}/>
+        <View style={styles.separator} />
       </View>
     )
   }
@@ -84,23 +85,17 @@ class Discover extends Component {
   renderHeader(rowData){
     return(
       <View>
-        <Text style={styles.title}> Featured </Text>
-
+        <Text style={styles.title}>Featured</Text>
         <Swiper
           style={styles.wrapper}
           height={imageHeight}
           autoplay={true}
-
-          dot={<View
-          style={{backgroundColor:'transparent'}} />}
-
+          dot={<View style={{backgroundColor:'transparent'}} />}
           activeDot={<View style={{backgroundColor: 'transparent'}} />}
         >
           <View
             style={styles.slideImage}
-            title={
-              <Text>Supreme Marketplace</Text>
-            }
+            title={<Text>Supreme Marketplace</Text>}
           >
             <Image
               source={require('../img/supremeGroup.jpeg')}
@@ -109,9 +104,7 @@ class Discover extends Component {
           </View>
           <View
             style={styles.slideImage}
-            title={
-              <Text>Streetart Group</Text>
-            }
+            title={<Text>Streetart Group</Text>}
           >
             <Image
               source={require('../img/kawsGroup.jpg')}
@@ -120,9 +113,7 @@ class Discover extends Component {
           </View>
           <View
             style={styles.slideImage}
-            title={
-              <Text>Jordan Marketplace</Text>
-            }
+            title={<Text>Jordan Marketplace</Text>}
           >
             <Image
               source={require('../img/jordanGroup.jpeg')}
@@ -130,8 +121,7 @@ class Discover extends Component {
             />
           </View>
         </Swiper>
-
-        <Text style={styles.subTitle}> Trending </Text>
+        <Text style={styles.subTitle}>Trending</Text>
       </View>
     )
   }
@@ -139,8 +129,10 @@ class Discover extends Component {
   render() {
     return (
       <View style={{flex:1}}>
-        <ListView dataSource={this.state.dataSource} renderRow={this.renderRow.bind(this)}
-        renderHeader={this.renderHeader.bind(this)}
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this.renderRow.bind(this)}
+          renderHeader={this.renderHeader.bind(this)}
         />
       </View>
     );
