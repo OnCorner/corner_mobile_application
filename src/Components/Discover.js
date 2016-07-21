@@ -7,10 +7,13 @@ import {
   View,
   Dimensions,
   Image,
-  ListView
+  ListView,
+  TouchableHighlight
 } from 'react-native';
 
 import Swiper from 'react-native-swiper'
+
+import Shop from '../Views/Shop'
 
 var width = Dimensions.get('window').width;
 
@@ -29,6 +32,14 @@ class Discover extends Component {
       {group: 'Chain Swanging', admin: 'nigo', size: '7', price:50, image:require('../img/chainGroup.jpg')},
       {group: 'Rollie Boyz', admin: 'wavyboy1234', size: 'XXL', price:25, image: require('../img/rolexGroup.jpg')}
     ])};
+  }
+
+  _navigate(type='Normal'){
+    this.props.navigator.push({
+      component: Shop,
+      type: type,
+      name: 'Shop'
+    })
   }
 
   renderRow(rowData){
@@ -53,7 +64,12 @@ class Discover extends Component {
           <View style={styles.rowContainer}>
             <View>
               <Text style={styles.groupText}>{rowData.group}</Text>
-              <Text>{rowData.admin}</Text>
+
+              <TouchableHighlight
+                onPress={()=>{this._navigate()}}
+              >
+                <Text>{rowData.admin}</Text>
+              </TouchableHighlight>
             </View>
             <View>
               <Text>Info</Text>

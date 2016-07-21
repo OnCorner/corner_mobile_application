@@ -13,12 +13,24 @@ import {
   Image
 } from 'react-native';
 
+import Drawer from 'react-native-drawer'
+
 import Login from './src/Components/Login'
 import Discover from './src/Components/Discover'
+import DrawerPanel from './src/Components/DrawerPanel'
+
+
 
 class corner_mobile extends Component {
+
+  openDrawer(){
+    this._drawer.open()
+  }
+
   renderScene(route, navigator){
-    return <route.component navigator={navigator} {...route.passProps}/>
+    return (
+        <route.component navigator={navigator} {...route.passProps}/>
+    )
   }
 
   configureScene(route, routeStack) {
@@ -30,24 +42,31 @@ class corner_mobile extends Component {
 
   render() {
     return (
-      <Navigator
-        configureScene={this.configureScene}
-        initialRoute={{name: 'Login', component: Login}}
-        renderScene={this.renderScene}
-        style={styles.container}
-
-        navigationBar={
-          <Navigator.NavigationBar
-            style={styles.navBar}
-            routeMapper={NavigationBarRouteMapper}
-          />
-        }
-      />
+      <Drawer
+        content={<DrawerPanel/>}
+        openDrawerOffset={100}
+        ref={(ref) => this._drawer = ref}
+        type='static'
+        tweenHandler={Drawer.tweenPresets.parallax}
+      >
+        <Navigator
+          configureScene={this.configureScene}
+          initialRoute={{name: 'Login', component: Login}}
+          renderScene={this.renderScene}
+          style={styles.container}
+          navigationBar={
+            <Navigator.NavigationBar
+              style={styles.navBar}
+              routeMapper={NavigationBarRouteMapper(this.openDrawer)}
+            />
+          }
+        />
+      </Drawer>
     );
   }
 }
 
-var NavigationBarRouteMapper = {
+var NavigationBarRouteMapper = openDrawer => ({
   LeftButton(route, navigator, index, navState){
     if(route.name == 'Login' || route.name == 'Interests'){
       return null
@@ -66,14 +85,11 @@ var NavigationBarRouteMapper = {
         </TouchableHighlight>
       )
     }else{
+      console.log(openDrawer)
+
       return(
         <TouchableHighlight
-          onPress={()=>{
-              if(index > 0){
-                navigator.pop()
-              }
-            }
-          }
+          onPress={()=>{openDrawer}}
         >
           <Image source={require('./src/img/listIcon.png')} style={styles.leftNavButtonImg}/>
         </TouchableHighlight>
@@ -126,7 +142,7 @@ var NavigationBarRouteMapper = {
       </Text>)
     }
   }
-};
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -167,6 +183,14 @@ const styles = StyleSheet.create({
     marginTop: 2,
     width: 27,
     height: 27
+  },
+  drawer: {
+    shadowColor: '#000000',
+    shadowOpacity: 0.8,
+    shadowRadius: 3
+  },
+  main: {
+    paddingLeft: 3
   }
 });
 

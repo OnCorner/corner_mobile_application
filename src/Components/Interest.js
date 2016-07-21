@@ -7,15 +7,17 @@ import {
   View,
   ListView,
   Image,
-  TouchableHighlight,
-  TouchableOpacity
+  TouchableHighlight
 } from 'react-native';
 
 import Home from './Home'
+import InterestCell from './InterestCell'
 
 class Interest extends Component {
   constructor(props){
     super(props);
+
+    this._renderRow = this._renderRow.bind(this);
 
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
@@ -34,18 +36,9 @@ class Interest extends Component {
     };
   }
 
-  renderRow(rowData){
+  _renderRow(rowData){
     return (
-          <View style={this.state.selected ? styles.transItem : styles.opacItem}>
-            <TouchableHighlight
-              onPress={ () => { this.setState({selected: !this.state.selected})}} underlayColor='transparent'>
-              <View>
-                <Image source={rowData.image} style={styles.groupImage}/>
-                <Text>{rowData.brand}</Text>
-                <Text>{rowData.style}</Text>
-              </View>
-            </TouchableHighlight>
-          </View>
+      <InterestCell rowData={rowData}/>
     )
   }
 
@@ -76,7 +69,7 @@ class Interest extends Component {
           </Text>
         </View>
 
-        <ListView contentContainerStyle={styles.list} dataSource={this.state.dataSource} renderRow={this.renderRow.bind(this)}
+        <ListView contentContainerStyle={styles.list} dataSource={this.state.dataSource} renderRow={this._renderRow}
         />
       </View>
     );
@@ -105,18 +98,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
-  opacItem: {
-    margin: 15,
-    width: 155,
-    height: 175,
-    opacity: 1.0
-  },
-  transItem: {
-    margin: 15,
-    width: 155,
-    height: 175,
-    opacity: 0.5
-  },
   subTitleText: {
     color: 'black',
     fontSize: 17,
@@ -125,10 +106,6 @@ const styles = StyleSheet.create({
   groupDetail: {
     width: 60,
     marginLeft: 15
-  },
-  groupImage: {
-    width: 155,
-    height: 155
   }
 });
 

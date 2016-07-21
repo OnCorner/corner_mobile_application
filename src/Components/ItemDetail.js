@@ -70,7 +70,6 @@ class ItemDetail extends Component {
           }}
           loop={true}
         >
-
           <View
             style={styles.infoSection}
             title={
