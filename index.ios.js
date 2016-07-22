@@ -19,9 +19,12 @@ import Login from './src/Components/Login'
 import Discover from './src/Components/Discover'
 import DrawerPanel from './src/Components/DrawerPanel'
 
-
-
 class corner_mobile extends Component {
+  constructor(){
+    super()
+
+    this.openDrawer = this.openDrawer.bind(this)
+  }
 
   openDrawer(){
     this._drawer.open()
@@ -43,11 +46,14 @@ class corner_mobile extends Component {
   render() {
     return (
       <Drawer
-        content={<DrawerPanel/>}
+        content={<DrawerPanel navigator={navigator}/>}
         openDrawerOffset={100}
         ref={(ref) => this._drawer = ref}
         type='static'
         tweenHandler={Drawer.tweenPresets.parallax}
+        tapToClose
+        acceptPan
+        negotiatePan
       >
         <Navigator
           configureScene={this.configureScene}
@@ -85,11 +91,9 @@ var NavigationBarRouteMapper = openDrawer => ({
         </TouchableHighlight>
       )
     }else{
-      console.log(openDrawer)
-
       return(
         <TouchableHighlight
-          onPress={()=>{openDrawer}}
+          onPress={()=>{openDrawer()}}
         >
           <Image source={require('./src/img/listIcon.png')} style={styles.leftNavButtonImg}/>
         </TouchableHighlight>

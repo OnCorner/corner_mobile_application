@@ -14,6 +14,7 @@ import {
 import Swiper from 'react-native-swiper'
 
 import Shop from '../Views/Shop'
+import Group from './Group'
 
 var width = Dimensions.get('window').width;
 
@@ -34,11 +35,11 @@ class Discover extends Component {
     ])};
   }
 
-  _navigate(type='Normal'){
+  _navigate(type='Normal', component, name=''){
     this.props.navigator.push({
-      component: Shop,
+      component: component,
       type: type,
-      name: 'Shop'
+      name: name
     })
   }
 
@@ -57,18 +58,19 @@ class Discover extends Component {
               <Text>Follow</Text>
             </View>
           </View>
-          <Image
-            source={rowData.image}
-            style={styles.groupThumb}
-          />
+
+          <TouchableHighlight onPress={()=>{this._navigate(null, Group, null)}}>
+            <Image
+              source={rowData.image}
+              style={styles.groupThumb}
+            />
+          </TouchableHighlight>
 
           <View style={styles.rowContainer}>
             <View>
               <Text style={styles.groupText}>{rowData.group}</Text>
 
-              <TouchableHighlight
-                onPress={()=>{this._navigate()}}
-              >
+              <TouchableHighlight onPress={()=>{this._navigate(null, Shop, 'Shop')}}>
                 <Text>{rowData.admin}</Text>
               </TouchableHighlight>
             </View>

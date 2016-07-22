@@ -49,8 +49,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     marginLeft: 15,
-
   }
 });
 
-export default Login
+export default InputNormal

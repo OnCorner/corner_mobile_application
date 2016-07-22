@@ -11,7 +11,7 @@ import {
 
 import Home from './Home'
 import Register from './Register'
-// import InputNormal from '../Elements/InputNormal.js'
+import InputNormal from '../Elements/InputNormal.js'
 
 class Login extends Component {
   _navigate(type='Normal'){
