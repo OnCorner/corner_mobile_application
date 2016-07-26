@@ -8,10 +8,8 @@ import {
 
 class InputNormal extends Component {
   static propTypes = {
-    color: React.PropTypes.string,
     style: React.PropTypes.object,
     placeholder: React.PropTypes.string,
-    placeholderTextColor: React.PropTypes.string,
   }
 
   chooseColor() {
@@ -32,11 +30,12 @@ class InputNormal extends Component {
     var pr = this.props;
     var st = this.state;
     var style = pr.style;
-    style.backgroundColor = pr.color;
+
     return (
       <TextInput
-        style={style}
-        placeholderTextColor={color}
+        style={{fontWeight: 'bold', height: 20.5}}
+        palceholderStyle={{fontWeight: 'bold'}}
+        placeholderTextColor='#AAAAAA'
         placeholder={pr.placeholder}
       />
     );

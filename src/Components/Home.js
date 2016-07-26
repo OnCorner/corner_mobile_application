@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Image
 } from 'react-native';
 
 import FeedView from './FeedView'
@@ -14,7 +15,7 @@ class Home extends Component {
     console.log(this.props)
     return (
       <View style={styles.container}>
-        <FeedView navigator={this.props.navigator} />
+        <FeedView navigator={this.props.navigator}/>
       </View>
     );
   }
@@ -24,6 +25,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 60
+  },
+  itemImage: {
+    flex: 1,
+    width: null,
+    height: null
+  },
+  textBold: {
+    marginTop:331,
+    marginLeft: 15,
+    color: 'red',
+    fontSize: 11,
+    fontFamily: 'Helvetica Neue',
+    fontWeight: 'bold'
+  },
+  text: {
+    marginTop:4,
+    marginLeft: 15,
+    color: 'red',
+    fontSize: 11,
+    fontFamily: 'Helvetica Neue'
   }
 });
 

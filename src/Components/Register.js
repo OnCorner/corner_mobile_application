@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import Interest from './Interest'
+import InputNormal from '../Elements/InputNormal'
 
 class Register extends Component {
   _navigate(type='Normal'){
@@ -23,26 +24,24 @@ class Register extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{marginTop: 60, marginLeft: 15}}>
-          <TextInput
-            style ={{height:14}}
-            placeholderTextColor='black'
+        <View style={{marginTop: 83, marginLeft: 78}}>
+          <InputNormal
             placeholder='Username'
           />
-          <TextInput
-            style ={{height:14}}
-            placeholderTextColor='black'
+
+          <InputNormal
             placeholder='Email'
           />
-          <TextInput
-            style ={{height:14}}
-            placeholderTextColor='black'
+
+          <InputNormal
             placeholder='Password'
           />
+
           <TouchableHighlight onPress={()=>this._navigate()}>
-            <Text style={{color: 'black'}}>Continue</Text>
+            <Text style={{color: '#AAAAAA', fontSize: 17.2}}>Continue</Text>
           </TouchableHighlight>
         </View>
+
         <View style={{marginBottom: 15, marginLeft: 15}}>
           <Text style={{fontWeight: 'bold'}}>Terms</Text>
           <Text>By continuing, you agree to </Text>

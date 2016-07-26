@@ -6,12 +6,17 @@ import {
   Text,
   TextInput,
   View,
-  TouchableHighlight
+  TouchableHighlight,
+  Image,
+  Dimensions
 } from 'react-native';
 
 import Home from './Home'
 import Register from './Register'
-import InputNormal from '../Elements/InputNormal.js'
+import InputNormal from '../Elements/InputNormal'
+
+var width = Dimensions.get('window').width;
+var height = Dimensions.get('window').height;
 
 class Login extends Component {
   _navigate(type='Normal'){
@@ -33,28 +38,30 @@ class Login extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={{color: 'black'}}> Corner </Text>
-        <InputNormal
-          color="black"
-          style={{height:14}}
-          placeholderTextColor='black'
-          placeholder='Username'
-        />
-        <TextInput
-          style={{height:14}}
-          placeholderTextColor='black'
-          placeholder='Password'
-        />
-        <TouchableHighlight onPress={()=>this._navigate()}>
-          <Text style={{color: 'black'}}>Login</Text>
-        </TouchableHighlight>
-        <TouchableHighlight
-          onPress={()=>this._navigateRegister()}
+        <Image
+          source={require('../img/elements/v2loginlogoonly.png')}
+          style={styles.itemImage}
         >
-          <Text style={{color: 'black'}}>Register</Text>
-        </TouchableHighlight>
-      </View>
+          <View style={styles.container}>
+            <InputNormal
+              placeholder='Username'
+            />
+
+            <InputNormal
+              placeholder='Password'
+            />
+
+            <TouchableHighlight onPress={()=>this._navigate()}>
+              <Text style={{color: '#AAAAAA', fontSize: 17.2}}>Login</Text>
+            </TouchableHighlight>
+
+            <TouchableHighlight
+              onPress={()=>this._navigateRegister()}
+            >
+              <Text style={{color: '#AAAAAA', fontSize: 17.2}}>Register</Text>
+            </TouchableHighlight>
+          </View>
+        </Image>
     );
   }
 }
@@ -63,8 +70,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
-    marginLeft: 15
+    marginLeft: 78,
+    marginTop: 83
+  },
+  itemImage: {
+    flex: 1,
+    width: null,
+    height: null
+  },
+  logo: {
+    padding: 30
   }
 });
 

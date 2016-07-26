@@ -28,6 +28,7 @@ class ItemDetail extends Component {
 
   render() {
     var rowData = this.props.rowData
+
     return (
       <View>
         <Swiper

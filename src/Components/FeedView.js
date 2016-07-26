@@ -7,13 +7,15 @@ import {
   View,
   TouchableHighlight,
   ListView,
-  Image
+  Image,
+  Dimensions
 } from 'react-native';
-
-import Swipeout from 'react-native-swipeout'
 
 import ItemDetail from './ItemDetail'
 import RightSwipeView from './RightSwipeView'
+import FeedViewRow from './FeedViewRow'
+
+var height = Dimensions.get('window').height;
 
 class FeedView extends Component {
   constructor(props){
@@ -22,66 +24,23 @@ class FeedView extends Component {
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
     this.state = {dataSource: ds.cloneWithRows([
-      {brand: 'Supreme', style: 'Classic Short Sleeve', size: 'OS', price:75, image: require('../img/item1.jpg'), image2: require('../img/item2.jpg'), image3: require('../img/item3.jpg')},
-      {brand: 'CAV EMPT', style: 'Noizig Shirt', size: '7', price:50, image:require('../img/item2.jpg')},
-      {brand: 'Berluti', style: 'Striped L/S Shirt', size: 'XXL', price:25, image: require('../img/item3.jpg')}
+      {brand: 'Gosha Rubchinskiy', style: 'Classic Short Sleeve', size: 'OS', price:500, image: require('../img/item3.jpg'), image2: require('../img/item2.jpg'), image3: require('../img/item5.jpg'), detail:'Super clean worn handful of times ', username: 'haru_jsb', category: 'Shirts', timeStamp:'2m'},
+
+      {brand: 'CAV EMPT', style: 'Noizig Shirt', size: '7', price:650, image:require('../img/item5.jpg'), detail:'TAG SIZE: S. Fits Larger. Perfect for 48 size. Easily fit for 50!', username: 'julzzang', category: 'Shoes', timeStamp:'15h'},
+
+      {brand: 'Berluti', style: 'Striped L/S Shirt', size: 'L', price:250, image: require('../img/item1.jpg'), detail:'This is a vintage beauty with a little wear but still in great shape.', username: 'suzhe012', category: 'Cars', timeStamp:'50s'},
+
+      {brand: 'Raf Simons', style: 'Paint Splash Sidezips', size: 'M', price:400, image: require('../img/item7.jpg'), detail:'Undercover television Marquee Moon Tee in the black color way. Brand New with tags and bag from the Undercover store.', username: 'lorents_v', category: 'Accessories', timeStamp:'4h'},
+
+      {brand: 'Undercover', style: 'Slim Dungarees', size: '29', price:500, image: require('../img/item6.jpg'), detail:'Beautiful tee, I love the Marquee Moon collection. ', username: 'pakrenw', category: 'Hats', timeStamp:'20m'},
+
+      {brand: 'Outlier', style: 'Low Velcros', size: 'OS', price:550, image: require('../img/item2.jpg'), detail:'Only selling because its not my size, if anyone has a size 3 please hmu.', username: 'vawer', category: 'Tops', timeStamp:'5s'}
     ])};
   }
 
-  _rowPressed(rowData, type='Normal'){
-    this.props.navigator.push({
-      component: ItemDetail,
-      name: 'Detail',
-      type: type,
-      passProps:{rowData: rowData}
-    })
-  }
-
   renderRow(rowData){
-    let rightRowView = [{
-      component: <RightSwipeView navigator={navigator} rowData={rowData}/>,
-      disabled: true,
-      styleButton: { width: 100 }
-    }];
-
-    let leftRowView = [{
-      text: 'Delete',
-      backgroundColor: 'red'
-    }]
-
     return (
-      <Swipeout
-        left={leftRowView}
-        right={rightRowView}
-        backgroundColor= 'transparent'
-      >
-        <TouchableHighlight
-          onPress={this._rowPressed.bind(this, rowData, 'Modal')}
-          underlayColor='#dddddd'
-        >
-          <View>
-            <View style={styles.rowContainer}>
-              <Image
-                source={rowData.image}
-                style={styles.thumb}
-              />
-              <View style={styles.textContainer}>
-                <View>
-                  <Text>{rowData.brand}</Text>
-                  <Text>{rowData.style}</Text>
-                  <Text>{rowData.size}</Text>
-                  <Text>${rowData.price}</Text>
-                </View>
-                <View>
-                  <Text>Info</Text>
-                  <Text>Delete</Text>
-                </View>
-              </View>
-            </View>
-            <View style={styles.separator}/>
-          </View>
-        </TouchableHighlight>
-      </Swipeout>
+      <FeedViewRow rowData={rowData} navigator={this.props.navigator}/>
     )
   }
 
@@ -96,24 +55,6 @@ class FeedView extends Component {
 }
 
 const styles = StyleSheet.create({
-  textContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between'
-  },
-  rowContainer: {
-    flexDirection: 'row',
-    padding: 10
-  },
-  separator: {
-    height: 1,
-    backgroundColor: '#dddddd'
-  },
-  thumb: {
-    width: 175,
-    height: 175,
-    marginRight: 10
-  }
 });
 
 export default FeedView

@@ -10,13 +10,14 @@ import {
 import ButtonNav from '../Elements/ButtonNav'
 
 import Home from './Home'
-import Shop from '../Views/Shop'
+import Shop from './Shop'
 import Discover from './Discover'
 
 class DrawerPanel extends Component {
   render() {
+    console.log(this.props)
     var pr = this.props
-    var navigator = pr.navigator
+    var navigator = pr.getNav()
 
     return (
       <View style={styles.container}>
@@ -24,7 +25,7 @@ class DrawerPanel extends Component {
           componentName={Home}
           navigator={navigator}
           pageName='Home'
-          style={{color: 'black', fontSize: 20}}
+          style={styles.button}
         />
         <ButtonNav
           componentName={Shop}
@@ -47,12 +48,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 30,
-    backgroundColor: 'pink'
+    backgroundColor: 'black'
   },
   button: {
     fontSize: 15,
     fontWeight: 'bold',
-    color: 'white'
+    color: '#AAAAAA'
   }
 });
 

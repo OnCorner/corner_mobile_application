@@ -12,11 +12,14 @@ import {
 
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 
-import ShopItems from '../Components/ShopItems'
-import ShopFollowing from '../Components/ShopFollowing'
+import ShopItems from './ShopItems'
+import ShopFollowing from './ShopFollowing'
+import ShopRating from './ShopRating'
 
 class Shop extends Component {
   render() {
+    var tabStyle = this.props.tabStyle
+
     return (
     <View style={styles.container}>
       <View style={styles.upperContainer}>
@@ -40,11 +43,11 @@ class Shop extends Component {
           tabBarUnderlineColor='white'
           tabBarActiveTextColor='black'
           tabBarInactiveTextColor='grey'
-          style={{borderBottomColor: 'white'}}
+          tabStyle={{borderBottomColor: 'white'}}
         >
           <ShopItems tabLabel='Items'/>
           <ShopFollowing tabLabel='Following'/>
-          <Text tabLabel='Rating 4.5'> This </Text>
+          <ShopRating tabLabel='Rating 4.9'/>
         </ScrollableTabView>
       </View>
     </View>

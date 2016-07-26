@@ -31,6 +31,8 @@ class corner_mobile extends Component {
   }
 
   renderScene(route, navigator){
+    this._navigator = navigator
+
     return (
         <route.component navigator={navigator} {...route.passProps}/>
     )
@@ -43,10 +45,14 @@ class corner_mobile extends Component {
     return Navigator.SceneConfigs.PushFromRight
   }
 
+  getNav = () => {
+    return this._navigator
+  }
+
   render() {
     return (
       <Drawer
-        content={<DrawerPanel navigator={navigator}/>}
+        content={<DrawerPanel getNav={this.getNav}/>}
         openDrawerOffset={100}
         ref={(ref) => this._drawer = ref}
         type='static'
@@ -58,7 +64,7 @@ class corner_mobile extends Component {
         <Navigator
           configureScene={this.configureScene}
           initialRoute={{name: 'Login', component: Login}}
-          renderScene={this.renderScene}
+          renderScene={(route, navigator) => this.renderScene(route, navigator)}
           style={styles.container}
           navigationBar={
             <Navigator.NavigationBar
@@ -87,7 +93,7 @@ var NavigationBarRouteMapper = openDrawer => ({
             }
           }
         >
-          <Image source={require('./src/img/deleteIcon.png')} style={styles.leftNavButtonImg}/>
+          <Text  style={styles.leftNavButtonImg}>X</Text>
         </TouchableHighlight>
       )
     }else{
@@ -95,7 +101,7 @@ var NavigationBarRouteMapper = openDrawer => ({
         <TouchableHighlight
           onPress={()=>{openDrawer()}}
         >
-          <Image source={require('./src/img/listIcon.png')} style={styles.leftNavButtonImg}/>
+          <Text style={styles.leftNavButtonImg}>○○○</Text>
         </TouchableHighlight>
       )
     }
@@ -129,7 +135,7 @@ var NavigationBarRouteMapper = openDrawer => ({
             name: 'Discover'
           })
         }>
-          <Image source={require('./src/img/sellIcon.png')} style={styles.RightNavButtonImg}/>
+          <Text style={styles.RightNavButtonImg}> Sell </Text>
         </TouchableHighlight>
       )
     }
@@ -151,42 +157,46 @@ var NavigationBarRouteMapper = openDrawer => ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'black'
   },
   navBar: {
+    height: 55,
+    backgroundColor: 'black'
+  },
+  transNavBar: {
     height: 60,
-    backgroundColor: 'white'
+    backgroundColor: 'transparent'
   },
   navBarTitle: {
-    marginTop: 4,
-    marginRight: 190,
-    fontSize: 20,
-    color: 'black'
-
+    marginTop: 1,
+    marginRight: 211,
+    fontSize: 15,
+    color: '#999999'
   },
   leftNavButtonText: {
     fontSize: 18,
     marginLeft: 13,
     marginTop: 2,
-    color: 'black'
+    color: 'white'
   },
   rightNavButtonText: {
     fontSize: 18,
     marginRight: 13,
     marginTop: 2,
-    color: 'black'
+    color: 'white'
   },
   leftNavButtonImg: {
-    marginLeft: 13,
-    marginTop: 2,
-    width: 27,
-    height: 27
+    marginLeft: 18,
+    width: 16,
+    height: 35,
+    color: '#999999',
+    fontWeight: 'bold',
+    fontSize: 8
   },
   RightNavButtonImg: {
     marginRight: 13,
-    marginTop: 2,
     width: 27,
-    height: 27
+    color: 'black'
   },
   drawer: {
     shadowColor: '#000000',
