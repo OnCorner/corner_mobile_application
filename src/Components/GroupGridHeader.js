@@ -21,12 +21,8 @@ class GroupGridHeader extends Component {
           source={previousRowData.image}
           style={styles.groupImage}
         />
-        <Text/>
         <Text style={styles.infoButton}>Info</Text>
-        <Text/>
-        <Text/>
         <Text style={styles.groupName}>{previousRowData.group}</Text>
-        <Text/>
         <Text style={styles.followButton}>Follow</Text>
       </View>
     );
@@ -35,24 +31,31 @@ class GroupGridHeader extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    marginBottom: 15,
-    width: width
+    width: width,
+    padding: 15,
+    alignItems: 'center'
   },
   groupImage: {
-    width: 340,
-    height: 190
+    width: 345,
+    height: 230,
+    marginBottom: 70
   },
   groupName: {
-    fontSize: 20,
-    fontWeight: 'bold'
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#AD985E',
+    fontFamily: 'Helvetica Neue',
+    marginBottom: 15
   },
   infoButton: {
-    fontSize: 15,
-    color: 'grey'
+    fontSize: 11,
+    color: 'grey',
+    fontFamily: 'Helvetica Neue'
   },
   followButton: {
-    fontSize: 15
+    fontSize: 13,
+    color: 'white',
+    marginBottom: 55
   }
 });
 

@@ -40,7 +40,7 @@ class DiscoverRow extends Component {
     return (
       <Swiper
         style={styles.wrapper}
-        height={177}
+        height={181}
         dot={<View style={{backgroundColor:'transparent'}} />}
         activeDot={<View style={{backgroundColor: 'transparent'}} />}
         loop={false}
@@ -58,7 +58,7 @@ class DiscoverRow extends Component {
         </View>
 
         {/* Main swipe */}
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, padding: 15}}>
           <View>
             {/*<View style={styles.rowContainer}>
               <View>
@@ -133,19 +133,20 @@ class DiscoverRow extends Component {
 
 const styles = StyleSheet.create({
   groupThumb: {
-    width: width,
-    height: 115
+    width: 345,
+    height: 115,
+    marginBottom: 15
   },
   groupText: {
     color: '#AD985E',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue',
     fontWeight: 'bold',
     marginBottom: 5
   },
   admin: {
     color: 'white',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue'
   },
   rowContainer: {
@@ -155,7 +156,7 @@ const styles = StyleSheet.create({
   rowGroupContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    margin: 15
+
   },
   deleteButton: {
     width: 17,
@@ -194,64 +195,64 @@ const styles = StyleSheet.create({
   },
   likeButton: {
     color: '#999999',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue',
     marginRight: 15
   },
   followButton: {
     color: 'white',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue'
   },
   brandText: {
     color: '#AD985E',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue',
     fontWeight: 'bold',
     marginBottom: 3
   },
   likeText: {
     color: '#999999',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue',
     marginBottom: 5
   },
   deleteNoButton: {
     marginRight: 15,
     color: '#999999',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue',
   },
   deleteYesButton: {
     color: 'white',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue'
   },
   deleteText: {
     color: '#999999',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue'
   },
   followerText: {
     color: '#999999',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue',
     marginBottom: 3
   },
   groupDetailText: {
     color: '#999999',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue'
   },
   adminText: {
     color: 'white',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue',
     marginBottom: 5
   },
   moreInfoText: {
     color: '#999999',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue'
   }
 });

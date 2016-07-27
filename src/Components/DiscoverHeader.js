@@ -29,8 +29,8 @@ class DiscoverHeader extends Component {
       dataSource: ds.cloneWithRows([
       {groupHeader: 'All Gucci Marketplace', adminHeader: 'gucciemperor123', imageHeader: require('../img/guccimane.jpg')},
       {groupHeader: 'Streetart Group', adminHeader: 'tidalwave', imageHeader: require('../img/kawsGroup.jpg')},
-      {groupHeader: 'Supreme Market', adminHeader: 'thadon', imageHeader: require('../img/supremeGroup.jpeg')},
-      {groupHeader: 'Big Ring', adminHeader: 'yakyak', imageHeader: require('../img/supremeGroup.jpeg')},
+      {groupHeader: 'Jordan Market', adminHeader: 'thadon', imageHeader: require('../img/supremeGroup.jpeg')},
+      {groupHeader: 'Big Ring', adminHeader: 'yakyak', imageHeader: require('../img/jordanGroup.jpeg')},
       {groupHeader: 'Squatd', adminHeader: 'hohokay', imageHeader: require('../img/lamboGroup.jpg')},
       {groupHeader: 'Vinyl', adminHeader: 'w1235', imageHeader: require('../img/rolexGroup.jpg')}
       ])
@@ -77,16 +77,15 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginBottom: 15,
     color: '#999999',
-    fontSize: 13,
+    fontSize: 15,
     fontFamily: 'Helvetica Neue',
     fontWeight: 'bold'
   },
   subTitle: {
-    marginTop: 30,
+    marginTop: 45,
     marginLeft: 15,
-    marginBottom: 15,
     color: '#999999',
-    fontSize: 13,
+    fontSize: 15,
     fontFamily: 'Helvetica Neue',
     fontWeight: 'bold'
   },
@@ -103,8 +102,8 @@ const styles = StyleSheet.create({
     height: imageHeight
   },
   group: {
-    width: 120,
-    height: 167,
+    width: 117,
+    height: 147,
     marginLeft: 15
   },
   list: {
@@ -112,8 +111,9 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   groupImage: {
-    width: 120,
-    height: 120
+    width: 100,
+    height: 100,
+    borderRadius: 50
   },
   adminText: {
     color: 'white',
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     marginTop: 15
   },
   groupDetailContainer: {
-
+    alignItems: 'center'
   }
 });
 

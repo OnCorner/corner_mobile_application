@@ -50,6 +50,7 @@ class corner_mobile extends Component {
   }
 
   render() {
+
     return (
       <Drawer
         content={<DrawerPanel getNav={this.getNav}/>}
@@ -164,7 +165,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black'
   },
   transNavBar: {
-    height: 60,
+    height: 55,
     backgroundColor: 'transparent'
   },
   navBarTitle: {

@@ -6,14 +6,18 @@ import {
   Text,
   View,
   Image,
-  TouchableHighlight
+  TouchableHighlight,
+  Dimensions
 } from 'react-native';
+
+var width = Dimensions.get('window').width;
 
 class GroupGridCell extends Component {
 
   render() {
     var previousRowData = this.props.rowData
 
+    console.log(width)
     return (
       <View style={styles.item}>
         <TouchableHighlight underlayColor='transparent'>
@@ -22,8 +26,8 @@ class GroupGridCell extends Component {
               source={previousRowData.image}
               style={styles.groupImage}
             />
-            <Text>{previousRowData.style}</Text>
-            <Text>${previousRowData.price}</Text>
+            <Text style={styles.styleText}>{previousRowData.style}</Text>
+            <Text style={styles.priceText}>${previousRowData.price}</Text>
           </View>
         </TouchableHighlight>
       </View>
@@ -33,13 +37,27 @@ class GroupGridCell extends Component {
 
 const styles = StyleSheet.create({
   item: {
-    margin: 15,
-    width: 155,
-    height: 175
+    width: 165,
+    height: 175,
+    marginBottom: 45,
+    marginLeft: 15
   },
   groupImage: {
-    width: 155,
+    width: 165,
     height: 155
+  },
+  styleText: {
+    color: '#999999',
+    fontSize: 11,
+    fontFamily: 'Helvetica Neue',
+    fontWeight: 'bold',
+    marginBottom: 5,
+    marginTop: 15
+  },
+  priceText: {
+    color: 'white',
+    fontSize: 11,
+    fontFamily: 'Helvetica Neue'
   }
 });
 

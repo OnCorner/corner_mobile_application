@@ -67,13 +67,47 @@ class Group extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 75
+    marginTop: 55
   },
   list: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center'
-  }
+  },
+  textBold: {
+    marginTop: 0,
+    marginLeft: 128,
+    color: 'red',
+    fontSize: 22,
+    fontFamily: 'Helvetica Neue',
+    fontWeight: 'bold'
+  },
+  text: {
+    marginTop:511,
+    marginLeft: 133,
+    color: 'red',
+    fontSize: 11,
+    fontFamily: 'Helvetica Neue'
+  },
+  textSecond: {
+    marginTop:3,
+    marginLeft: 72,
+    color: 'red',
+    fontSize: 11,
+    fontFamily: 'Helvetica Neue'
+  },
+  itemImage: {
+    flex: 1,
+    width: null,
+    height: null,
+    marginTop: 70
+  },
+  groupImage: {
+    width: 345,
+    height: 231,
+    marginLeft: 15,
+    marginTop: 104
+  },
 });
 
 export default Group

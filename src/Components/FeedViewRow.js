@@ -175,69 +175,69 @@ const styles = StyleSheet.create({
   },
   brandText: {
     color: '#AD985E',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue',
     fontWeight: 'bold',
     marginBottom: 3
   },
   styleText: {
     color: '#999999',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue',
     marginBottom: 3
   },
   sizeText: {
     color: '#999999',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue',
     marginBottom: 5
   },
   priceText: {
     color: 'white',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue'
   },
   detailText: {
     color: '#999999',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue'
   },
   usernameText: {
     color: 'white',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue',
     marginBottom: 5
   },
   categoryText: {
     color: '#999999',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue'
   },
   deleteNoButton: {
     marginRight: 15,
     color: '#999999',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue',
   },
   deleteYesButton: {
     color: 'white',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue'
   },
   contactButton: {
     color: '#999999',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue',
     marginRight: 15
   },
   buyButton: {
     color: 'white',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue'
   },
   deleteText: {
     color: '#999999',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue'
   },
   rowDelete: {

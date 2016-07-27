@@ -21,8 +21,8 @@ class ShopItems extends Component {
     this.state = {
       selected: false,
       dataSource: ds.cloneWithRows([
-      {style: 'Heavy weight Blue Oxford', price: 15, image: require('../img/item4.jpg')},
-      {style: 'Tiran tee', price: 45, image: require('../img/item5.jpg')},
+      {style: 'Heavy weight Blue Oxford', price: 250, image: require('../img/item4.jpg')},
+      {style: 'Tiran tee', price: 400, image: require('../img/item5.jpg')},
       {style: 'Archive Denim Jacket', price: 150, image: require('../img/item6.jpg')},
       {style: 'Classic Short Sleeve', price: 300, image: require('../img/item7.jpg')},
       {style: 'Accessories', price: 500, image: require('../img/item1.jpg')},
@@ -42,8 +42,8 @@ class ShopItems extends Component {
               source={rowData.image}
               style={styles.groupImage}
             />
-            <Text>{rowData.style}</Text>
-            <Text>${rowData.price}</Text>
+            <Text style={styles.styleText}>{rowData.style}</Text>
+            <Text style={styles.priceText}>${rowData.price}</Text>
           </View>
         </TouchableHighlight>
       </View>
@@ -62,21 +62,33 @@ class ShopItems extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  item: {
-    margin: 15,
-    width: 155,
-    height: 175
-  },
-  groupImage: {
-    width: 155,
-    height: 155
-  },
   list: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexWrap: 'wrap'
+  },
+  item: {
+    width: 165,
+    height: 175,
+    marginBottom: 45,
+    marginLeft: 15,
+    marginTop: 15
+  },
+  groupImage: {
+    width: 165,
+    height: 155
+  },
+  styleText: {
+    color: '#999999',
+    fontSize: 13,
+    fontFamily: 'Helvetica Neue',
+    fontWeight: 'bold',
+    marginBottom: 5,
+    marginTop: 15
+  },
+  priceText: {
+    color: 'white',
+    fontSize: 13,
+    fontFamily: 'Helvetica Neue'
   }
 });
 
