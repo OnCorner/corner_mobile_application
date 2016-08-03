@@ -28,30 +28,30 @@ class ShopFollowing extends Component {
 
   renderRow(rowData){
     return (
-        <TouchableHighlight
-          underlayColor='#dddddd'
-        >
-          <View>
-            <View style={styles.rowContainer}>
-              <Image
-                source={rowData.image}
-                style={styles.thumb}
-              />
-              <View style={styles.textContainer}>
-                <View>
-                  <Text style={styles.userText}>{rowData.username}</Text>
-                </View>
-                <View>
-                  <Text>{rowData.userDetail}</Text>
-                </View>
-                <View>
-                  <Text style={styles.followButton}>Following</Text>
+          <View style={styles.container}>
+            <TouchableHighlight
+              underlayColor='#dddddd'
+            >
+              <View style={styles.rowContainer}>
+                <Image
+                  source={rowData.image}
+                  style={styles.thumb}
+                />
+                <View style={styles.textContainer}>
+                  <View>
+                    <Text style={styles.userText}>{rowData.username}</Text>
+                  </View>
+                  <View>
+                    <Text style={styles.userDetailText}>{rowData.userDetail}</Text>
+                  </View>
+                  <View>
+                    <Text style={styles.followButton}>Following</Text>
+                  </View>
                 </View>
               </View>
-            </View>
-            <View style={styles.separator}/>
+            </TouchableHighlight>
           </View>
-        </TouchableHighlight>
+
     );
   }
 
@@ -70,28 +70,37 @@ const styles = StyleSheet.create({
     flex: 1
   },
   textContainer: {
-    flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between'
   },
   rowContainer: {
     flexDirection: 'row',
-    padding: 10
+    padding: 15
   },
   separator: {
     height: 1,
     backgroundColor: '#dddddd'
   },
   thumb: {
-    width: 80,
-    height: 80,
-    marginRight: 10
+    width: 50,
+    height: 50,
+    marginRight: 15
   },
   userText: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 11,
+    fontFamily: 'Helvetica Neue',
+  },
+  userDetailText: {
+    color: 'white',
+    fontSize: 11,
+    fontFamily: 'Helvetica Neue',
   },
   followButton: {
-    color: 'grey'
+    color: '#AD985E',
+    fontSize: 11,
+    fontFamily: 'Helvetica Neue',
   }
 });
 

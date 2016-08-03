@@ -7,10 +7,12 @@ import {
   View,
   Image,
   Dimensions,
-  TouchableHighlight
+  TouchableHighlight,
+  ListView
 } from 'react-native';
-
 import Swiper from 'react-native-swiper'
+
+import ItemDetailComment from './ItemDetailComment'
 
 var width = Dimensions.get('window').width;
 
@@ -21,13 +23,33 @@ var imageHeight = Dimensions.get('window').height / 1.333;
 var infoHeight = Dimensions.get('window').height - imageHeight
 
 class ItemDetail extends Component {
+  constructor(props){
+    super(props);
+
+    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
+    this.state = {dataSource: ds.cloneWithRows([
+      {username: 'meganmarkel', ratingComment: 'Can you ship to Europe?', image: require('../img/user1.jpg'), rating: 5.0},
+      {username: 'karaguilera', ratingComment: 'Where was it purchased?', image:require('../img/user2.jpg'), rating: 4.5},
+      {username: 'phoebedarcy', ratingComment: 'check this out @lilugleman', image: require('../img/user3.jpeg'), rating: 5.0},
+      {username: 'ghana1994', ratingComment: 'Described as is with top notch quality', image: require('../img/lamboGroup.jpg'), rating: 4.9},
+      {username: 'Berluti', ratingComment: 'always up to date with everything', image: require('../img/item3.jpg'), rating: 5.0},
+      {username: 'Berluti', ratingComment: 'Striped L/S Shirt', image: require('../img/item3.jpg'), rating: 4.9}
+    ])};
+  }
+
+  renderRow(rowData){
+    return (
+      <ItemDetailComment rowData={rowData}/>
+    );
+  }
 
   _buyPressed(){
     console.log('BUY HAS BEEN PRESSED')
   }
 
   render() {
-    var rowData = this.props.rowData
+    var previousRowData = this.props.rowData
 
     return (
       <View>
@@ -35,22 +57,28 @@ class ItemDetail extends Component {
           style={styles.wrapper}
           loop={false}
           height={imageHeight}
+
+          dot={<View style={{backgroundColor:'#999999', width: 5, height: 5,borderRadius: 4, marginLeft: 3, marginRight: 3}}/>}
+
+          activeDot={<View style={{backgroundColor: 'white', width: 5, height: 5, borderRadius: 4, marginLeft: 3, marginRight: 3}} />}
+
+          loop={false}
         >
           <View style={styles.slideImage}>
             <Image
-              source={rowData.image}
+              source={previousRowData.image}
               style={styles.itemImage}
             />
           </View>
           <View style={styles.slideImage}>
             <Image
-              source={rowData.image2}
+              source={previousRowData.image2}
               style={styles.itemImage}
             />
           </View>
           <View style={styles.slideImage}>
             <Image
-              source={rowData.image3}
+              source={previousRowData.image3}
               style={styles.itemImage}
             />
           </View>
@@ -60,43 +88,37 @@ class ItemDetail extends Component {
           style={styles.wrapper}
           height={infoHeight}
           onMomentumScrollEnd={function(e, state, context){console.log('index:', state.index)}}
-          dot={
-            <View
-              style={{backgroundColor:'rgba(0,0,0,.2)', width: 5, height: 5,borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,}} />}
-              activeDot={<View style={{backgroundColor: '#000', width: 8, height: 8, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,}} />}
-              paginationStyle={{bottom: 5, left: null, right: 10}}
-              loop={true}
-            >
-            <View
-              style={styles.infoSection}
-              title={
-                <View style={{flexDirection: 'row', marginBottom: 60}}>
-                  <Image
-                    source={require('../img/profileIcon.png')}
-                    style={styles.profileThumb}
-                  />
-                  <Text
-                    numberOfLines={1}
-                    style={{fontWeight: 'bold', fontSize:13}}
-                  >
-                    shawn_kemp
-                  </Text>
-                </View>
-              }
-            >
-            <Text> </Text>
-            <Text>{rowData.brand}</Text>
-            <Text>{rowData.style} • Size {rowData.size}</Text>
-            <Text> </Text>
-            <Text>Worn very gently with extreme care</Text>
-            <Text> </Text>
+
+          dot={<View style={{backgroundColor:'#999999', width: 5, height: 5,borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,}}/>}
+
+          activeDot={<View style={{backgroundColor: 'white', width: 5, height: 5, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,}} />}
+
+          paginationStyle={{bottom: 15, left: null, right: 15}}
+          loop={false}
+        >
+          <View
+            style={styles.infoSection}
+            title={
+              <View style={{flexDirection: 'row', marginBottom: 75, marginLeft: 15}}>
+                <Text
+                  numberOfLines={1}
+                  style={styles.usernameText}
+                >
+                  shawn_kemp
+                </Text>
+              </View>
+            }
+          >
+            <Text style={styles.brandText}>{previousRowData.brand}</Text>
+            <Text style={styles.styleText}>{previousRowData.style} • Size {previousRowData.size}</Text>
+            <Text style={styles.detailText}>Worn very gently with extreme care</Text>
             <View style={{flexDirection: 'row'}}>
               <TouchableHighlight
                 underlayColor='transparent'
                 onPress={this._buyPressed.bind(this)}
                 style={styles.buyButton}
               >
-                <Text>Buy ${rowData.price}</Text>
+                <Text style={styles.buyButtonText}>Buy ${previousRowData.price}</Text>
               </TouchableHighlight>
 
               <TouchableHighlight
@@ -104,24 +126,20 @@ class ItemDetail extends Component {
                 onPress={this._buyPressed.bind(this)}
                 style={styles.offerButton}
               >
-                <Text>Offer</Text>
+                <Text style={styles.offerButtonText}>Offer</Text>
               </TouchableHighlight>
             </View>
           </View>
 
           <View
             style={styles.commentSection}
-            title={
-              <Text
-                style={{marginBottom: 60, fontWeight: 'bold', fontSize: 13}}
-                numberOfLines={4}
-              >
-                Comments
-              </Text>
-            }
           >
-            <Text style={{fontWeight: 'bold'}}>COMMENTS RA HER</Text>
+            <ListView
+              dataSource={this.state.dataSource}
+              renderRow={this.renderRow.bind(this)}
+            />
           </View>
+
         </Swiper>
       </View>
     );
@@ -143,18 +161,17 @@ const styles = StyleSheet.create({
   },
   infoSection: {
     flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center'
+    backgroundColor: 'black',
+    alignItems: 'center',
+    paddingTop: 15
   },
   commentSection: {
     flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center'
+    backgroundColor: 'black'
   },
   buyButton: {
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: '#999999',
     borderRadius: 5,
     height: 25,
     width: 125,
@@ -165,7 +182,7 @@ const styles = StyleSheet.create({
   },
   offerButton: {
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: '#999999',
     borderRadius: 5,
     height: 25,
     width: 125,
@@ -178,6 +195,52 @@ const styles = StyleSheet.create({
     width: 17,
     height: 17,
     marginRight: 5
+  },
+  brandText: {
+    color: '#AD985E',
+    fontSize: 13,
+    fontFamily: 'Helvetica Neue',
+    fontWeight: 'bold',
+    marginBottom: 5
+  },
+  styleText: {
+    color: '#999999',
+    fontSize: 13,
+    fontFamily: 'Helvetica Neue',
+    marginBottom: 3
+  },
+  detailText: {
+    color: '#999999',
+    fontSize: 13,
+    fontFamily: 'Helvetica Neue',
+    marginBottom: 15
+  },
+  buyButtonText: {
+    color: '#999999',
+    fontSize: 13,
+    fontFamily: 'Helvetica Neue',
+  },
+  offerButtonText: {
+    color: '#999999',
+    fontSize: 13,
+    fontFamily: 'Helvetica Neue',
+  },
+  usernameText: {
+    color: 'white',
+    fontSize: 13,
+    fontFamily: 'Helvetica Neue',
+  },
+  commentSectionHeader: {
+    color: '#999999',
+    fontSize: 13,
+    fontFamily: 'Helvetica Neue',
+    marginBottom: 75,
+    marginLeft: 15
+  },
+  commentSectionText: {
+    color: '#999999',
+    fontSize: 13,
+    fontFamily: 'Helvetica Neue',
   }
 });
 

@@ -104,7 +104,8 @@ const styles = StyleSheet.create({
     color: '#AD985E',
     fontSize: 13,
     fontFamily: 'Helvetica Neue',
-    marginBottom: 15
+    marginBottom: 15,
+    fontWeight: 'bold'
   },
   textBold: {
     color: 'red',

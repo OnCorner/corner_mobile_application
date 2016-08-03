@@ -20,7 +20,6 @@ var height = Dimensions.get('window').height;
 
 class Login extends Component {
   _navigate(type='Normal'){
-    console.log(this.props)
     this.props.navigator.replace({
       component: Home,
       type: type,
@@ -52,13 +51,13 @@ class Login extends Component {
             />
 
             <TouchableHighlight onPress={()=>this._navigate()}>
-              <Text style={{color: '#AAAAAA', fontSize: 17.2}}>Login</Text>
+              <Text style={{color: '#999999', fontSize: 17.2}}>Login</Text>
             </TouchableHighlight>
 
             <TouchableHighlight
               onPress={()=>this._navigateRegister()}
             >
-              <Text style={{color: '#AAAAAA', fontSize: 17.2}}>Register</Text>
+              <Text style={{color: '#999999', fontSize: 17.2}}>Register</Text>
             </TouchableHighlight>
           </View>
         </Image>

@@ -35,7 +35,7 @@ class InputNormal extends Component {
       <TextInput
         style={{fontWeight: 'bold', height: 20.5}}
         palceholderStyle={{fontWeight: 'bold'}}
-        placeholderTextColor='#AAAAAA'
+        placeholderTextColor='#999999'
         placeholder={pr.placeholder}
       />
     );

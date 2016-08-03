@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   groupImage: {
     width: 345,
     height: 230,
-    marginBottom: 70
+    marginBottom: 45
   },
   groupName: {
     fontSize: 22,
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   followButton: {
     fontSize: 13,
     color: 'white',
-    marginBottom: 55
+    marginBottom: 30
   }
 });
 

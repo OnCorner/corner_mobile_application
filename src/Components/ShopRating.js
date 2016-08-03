@@ -28,11 +28,11 @@ class ShopRating extends Component {
 
   renderRow(rowData){
     return (
+      <View style={styles.container}>
         <TouchableHighlight
           underlayColor='#dddddd'
         >
-          <View>
-            <View style={styles.rowContainer}>
+          <View style={styles.rowContainer}>
               <Image
                 source={rowData.image}
                 style={styles.thumb}
@@ -49,9 +49,8 @@ class ShopRating extends Component {
                 </View>
               </View>
             </View>
-            <View style={styles.separator}/>
-          </View>
-        </TouchableHighlight>
+          </TouchableHighlight>
+        </View>
     );
   }
 
@@ -76,25 +75,33 @@ const styles = StyleSheet.create({
   },
   rowContainer: {
     flexDirection: 'row',
-    padding: 10
+    padding: 15
   },
   separator: {
     height: 1,
     backgroundColor: '#dddddd'
   },
   thumb: {
-    width: 80,
-    height: 80,
-    marginRight: 10
+    width: 50,
+    height: 50,
+    marginRight: 15
   },
   userText: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 11,
+    fontFamily: 'Helvetica Neue',
   },
   followButton: {
-    color: 'grey'
+    color: '#AD985E',
+    fontSize: 11,
+    fontFamily: 'Helvetica Neue',
   },
   ratingComment: {
-    fontStyle: 'italic'
+    fontStyle: 'italic',
+    color: '#999999',
+    fontSize: 11,
+    fontFamily: 'Helvetica Neue'
   }
 });
 

@@ -50,6 +50,13 @@ class corner_mobile extends Component {
   }
 
   render() {
+    var routeName;
+    if(this.navigator) {
+      const routes = this.navigator.getCurrentRoutes();
+      routeName = routes[routes.length-1].name;
+    }
+
+    console.log(routeName)
 
     return (
       <Drawer
@@ -69,7 +76,7 @@ class corner_mobile extends Component {
           style={styles.container}
           navigationBar={
             <Navigator.NavigationBar
-              style={styles.navBar}
+              style={routeName == 'Detail' ? styles.transNavBar : styles.navBar}
               routeMapper={NavigationBarRouteMapper(this.openDrawer)}
             />
           }
@@ -196,8 +203,7 @@ const styles = StyleSheet.create({
   },
   RightNavButtonImg: {
     marginRight: 13,
-    width: 27,
-    color: 'black'
+    width: 27
   },
   drawer: {
     shadowColor: '#000000',

@@ -11,13 +11,12 @@ import {
 } from 'react-native';
 
 import Home from './Home'
-import InterestCell from './InterestCell'
+import InterestGridCell from './InterestGridCell'
+import InterestGridHeader from './InterestGridHeader'
 
 class Interest extends Component {
   constructor(props){
     super(props);
-
-    this._renderRow = this._renderRow.bind(this);
 
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
@@ -36,43 +35,26 @@ class Interest extends Component {
     };
   }
 
-  _renderRow(rowData){
+  renderRow(rowData){
     return (
-      <InterestCell rowData={rowData} />
+      <InterestGridCell rowData={rowData} />
     )
   }
 
-  _goPressed(type='Normal'){
-    this.props.navigator.replace({
-      component: Home,
-      type: type,
-      name: 'Feed'
-    })
+  renderHeader(){
+    return(
+      <InterestGridHeader navigator={this.props.navigator}/>
+    )
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.title}>
-          <Text style={styles.titleText}>
-            Select 3 groups from our suggestions to kick off!
-          </Text>
-          <Text/>
-            <TouchableHighlight
-              onPress={()=>this._goPressed()}
-              style={{width:27}}
-              underlayColor='transparent'
-            >
-              <Text style={styles.goButton}>Go!</Text>
-            </TouchableHighlight>
-          <Text/>
-          <Text style={styles.subTitleText}>Featured</Text>
-        </View>
-
         <ListView
           contentContainerStyle={styles.list}
           dataSource={this.state.dataSource}
-          renderRow={this._renderRow}
+          renderRow={this.renderRow.bind(this)}
+          renderHeader={this.renderHeader.bind(this)}
         />
       </View>
     );
@@ -81,34 +63,13 @@ class Interest extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-  },
-  title: {
-    marginTop: 70,
-    marginLeft: 15,
-    marginBottom: 15,
-  },
-  titleText: {
-    color: 'black',
-    fontSize: 17,
-    width: 200
-  },
-  goButton: {
-    color: 'black',
-    fontSize: 17
+    flex: 1,
+    marginTop: 55
   },
   list: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-  },
-  subTitleText: {
-    color: 'black',
-    fontSize: 17,
-    fontWeight: 'bold'
-  },
-  groupDetail: {
-    width: 60,
-    marginLeft: 15
+    alignItems: 'center'
   }
 });
 

@@ -17,7 +17,6 @@ class GroupGridCell extends Component {
   render() {
     var previousRowData = this.props.rowData
 
-    console.log(width)
     return (
       <View style={styles.item}>
         <TouchableHighlight underlayColor='transparent'>
@@ -38,9 +37,8 @@ class GroupGridCell extends Component {
 const styles = StyleSheet.create({
   item: {
     width: 165,
-    height: 175,
-    marginBottom: 45,
-    marginLeft: 15
+    marginLeft: 15,
+    marginBottom: 15
   },
   groupImage: {
     width: 165,
@@ -48,7 +46,7 @@ const styles = StyleSheet.create({
   },
   styleText: {
     color: '#999999',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue',
     fontWeight: 'bold',
     marginBottom: 5,
@@ -56,7 +54,7 @@ const styles = StyleSheet.create({
   },
   priceText: {
     color: 'white',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: 'Helvetica Neue'
   }
 });

@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 
-class InterestCell extends Component {
+class InterestGridCell extends Component {
   constructor(props){
     super(props);
     this.state={
@@ -36,8 +36,8 @@ class InterestCell extends Component {
                 null
               }
             </Image>
-            <Text>{rowData.brand}</Text>
-            <Text>{rowData.style}</Text>
+            <Text  style={styles.brandText}>{rowData.brand}</Text>
+            <Text style={styles.styleText}>{rowData.style}</Text>
           </View>
         </TouchableHighlight>
       </View>
@@ -53,13 +53,11 @@ const styles = StyleSheet.create({
   opacItem: {
     margin: 15,
     width: 155,
-    height: 175,
     opacity: 1.0
   },
   transItem: {
     margin: 15,
     width: 155,
-    height: 175,
     opacity: 0.7
   },
   selectedView: {
@@ -68,10 +66,23 @@ const styles = StyleSheet.create({
     flex: 1
   },
   selectedText: {
-    color: 'grey',
     fontWeight: 'bold',
-    fontSize: 27
+    fontSize: 22,
+    color: '#999999'
+  },
+  brandText: {
+    color: '#AD985E',
+    fontSize: 13,
+    fontFamily: 'Helvetica Neue',
+    fontWeight: 'bold',
+    marginBottom: 5,
+    marginTop: 15
+  },
+  styleText: {
+    color: '#999999',
+    fontSize: 13,
+    fontFamily: 'Helvetica Neue'
   }
 });
 
-export default InterestCell
+export default InterestGridCell

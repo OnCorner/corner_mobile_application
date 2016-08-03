@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   item: {
     width: 165,
     height: 175,
-    marginBottom: 45,
+    marginBottom: 40,
     marginLeft: 15,
     marginTop: 15
   },
