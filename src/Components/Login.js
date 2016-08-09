@@ -1,6 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
+import Session from '../Modules/Session.js';
 import {
   StyleSheet,
   Text,
@@ -35,6 +36,39 @@ class Login extends Component {
     })
   }
 
+  _connectDB(){
+    var data = {
+      email: "a@a",
+      password: '123',
+      username: 'hihi',
+      firstName: 'hi',
+      lastName: 'hello'
+    }
+
+    var myInit = {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify(data),
+    };
+
+    fetch('http://localhost:1337/user/create/', myInit)
+    .then(result=>result.json())
+    .then(user=>{
+      console.log(user);
+      Session.user = user;
+    })
+    .done(()=>{
+      myInit = { method: 'GET',
+                 mode: 'cors'};
+
+      fetch('http://localhost:1337/user/find/', myInit)
+      .then(result=>result.json())
+      .then(users=>{
+        console.log(users);
+      });
+    })
+  }
+
   render() {
     return (
         <Image
@@ -58,6 +92,10 @@ class Login extends Component {
               onPress={()=>this._navigateRegister()}
             >
               <Text style={{color: '#999999', fontSize: 17.2}}>Register</Text>
+            </TouchableHighlight>
+
+            <TouchableHighlight onPress={()=>this._connectDB()}>
+              <Text style={{color: '#999999', fontSize: 17.2}}>Connect</Text>
             </TouchableHighlight>
           </View>
         </Image>
