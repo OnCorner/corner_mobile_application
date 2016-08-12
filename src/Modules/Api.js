@@ -1,6 +1,12 @@
 /*
   Usage:
-
+  var Api = require("../Modules/Api.js");
+  Api.server.find('user');
+  Api.server.post('someurl', data); // data is optional
+  Api.server.post('login', data);
+  Api.server.post('logout');
+  Api.server.create('user', {email: 'conner@conner.com', password: 'test'});
+  Api.server.update('user', {firstName: 'Newname'}, fj48f43lvn943gl); // fj48f43lvn943gl == some id
 */
 
 var Url = require("./Url.js");
@@ -102,6 +108,6 @@ function chooseUrl(routeType) {
 }
 
 var Api = module.exports = {
-  server: new Route(""),
+  server: new Route(Url.localhost),
   baseUrl: window.location.port == '8080' ? Url.localhost : Url.cornerProd,
 }
