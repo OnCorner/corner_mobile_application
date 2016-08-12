@@ -18,10 +18,10 @@ class Route {
       }
     };
     if(arguments.length == 1) {
-      return fetch(url, options);
+      return fetch(url, options).then(res => res.json());
     }
     options.body = JSON.stringify(data);
-    return fetch(url, options);
+    return fetch(url, options).then(res => res.json());
   }
   fetchDelete(url, data) {
     var options = {
@@ -32,10 +32,10 @@ class Route {
       }
     };
     if(arguments.length == 1) {
-      return fetch(url, options);
+      return fetch(url, options).then(res => res.json());
     }
     options.body = JSON.stringify(data);
-    return fetch(url, options);
+    return fetch(url, options).then(res => res.json());
   }
   post(url, data) {
     if(arguments.length == 1) {

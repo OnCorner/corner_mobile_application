@@ -4,5 +4,5 @@ module.exports = {
     return currentLocation == "/";
   },
   cornerProd: "https://corner-prod.herokuapp.com",
-  localhost: "https://localhost:1337",
+  localhost: "http://localhost:1337",
 };
