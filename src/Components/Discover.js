@@ -31,7 +31,7 @@ class Discover extends Component {
 
   renderRow(rowData){
     return(
-      <DiscoverRow navigator={this.props.navigator} rowData={rowData}/>
+      <DiscoverRow _handleNavigate={this.props._handleNavigate} rowData={rowData}/>
     )
   }
 
@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
     height: null
   },
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: 'black'
   },
   textBold: {
     marginTop: 71,

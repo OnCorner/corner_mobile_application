@@ -14,13 +14,20 @@ import Home from './Home'
 
 var width = Dimensions.get('window').width * .50;
 
+const route = {
+  home: {
+    type: 'push',
+    route: {
+      key: 'home',
+      title: 'Home',
+      component: Home
+    }
+  }
+}
+
 class InterestGridHeader extends Component {
-  _goPressed(type='Normal'){
-    this.props.navigator.replace({
-      component: Home,
-      type: type,
-      name: 'Feed'
-    })
+  _navigate(route){
+    this.props._handleNavigate(route)
   }
 
   render() {
@@ -32,7 +39,7 @@ class InterestGridHeader extends Component {
             Select 3 groups from our suggestions to begin
           </Text>
           <TouchableHighlight
-            onPress={()=>this._goPressed()}
+            onPress={()=>this._navigate(route.home)}
             underlayColor='transparent'
           >
             <Text style={styles.goButton}>LIFT OFF!</Text>

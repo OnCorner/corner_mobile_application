@@ -43,7 +43,7 @@ class Interest extends Component {
 
   renderHeader(){
     return(
-      <InterestGridHeader navigator={this.props.navigator}/>
+      <InterestGridHeader _handleNavigate={this.props._handleNavigate}/>
     )
   }
 
@@ -64,7 +64,8 @@ class Interest extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 55
+    marginTop: 55,
+    backgroundColor: 'black'
   },
   list: {
     flexDirection: 'row',

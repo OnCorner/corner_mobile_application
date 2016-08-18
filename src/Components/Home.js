@@ -14,7 +14,7 @@ class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <FeedView navigator={this.props.navigator}/>
+        <FeedView _handleNavigate={this.props._handleNavigate}/>
       </View>
     );
   }
@@ -23,7 +23,7 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 60
+    marginTop: 55
   },
   itemImage: {
     flex: 1,

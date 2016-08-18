@@ -17,25 +17,28 @@ class DrawerPanel extends Component {
   render() {
     console.log(this.props)
     var pr = this.props
-    var navigator = pr.getNav()
+    // var navigator = pr._handleNavigate()
 
     return (
       <View style={styles.container}>
         <ButtonNav
           componentName={Home}
-          navigator={navigator}
+          _handleNavigate={this.props._handleNavigate}
+          navKey='home'
           pageName='Home'
           style={styles.button}
         />
         <ButtonNav
           componentName={Shop}
-          navigator={navigator}
+          _handleNavigate={this.props._handleNavigate}
+          navKey='shop'
           pageName='Shop'
           style={styles.button}
         />
         <ButtonNav
           componentName={Discover}
-          navigator={navigator}
+          _handleNavigate={this.props._handleNavigate}
+          navKey='discover'
           pageName='Discover'
           style={styles.button}
         />

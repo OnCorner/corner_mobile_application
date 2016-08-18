@@ -19,30 +19,46 @@ import InputNormal from '../Elements/InputNormal'
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 
+const route = {
+  home: {
+    type: 'push',
+    route: {
+      key: 'home',
+      title: 'Home',
+      component: Home
+    }
+  },
+
+  register: {
+    type: 'push',
+    route: {
+      key: 'register',
+      title: 'Register',
+      component: Register
+    }
+  }
+}
+
 class Login extends Component {
-  _navigate(type='Normal'){
-    this.props.navigator.replace({
-      component: Home,
-      type: type,
-      name: 'Feed'
-    })
+  _navigate(route) {
+    this.props._handleNavigate(route)
   }
 
-  _navigateRegister(type='Modal'){
-    this.props.navigator.push({
-      component: Register,
-      type: type,
-      name: 'Register'
-    })
-  }
+  // _navigateRegister(type='Modal') {
+  //   this.props.navigator.push({
+  //     component: Register,
+  //     type: type,
+  //     name: 'Register'
+  //   })
+  // }
 
-  _connectDB(){
+  _connectDB() {
     var data = {
-      email: "a@a",
-      password: '123',
-      username: 'hihi',
-      firstName: 'hi',
-      lastName: 'hello'
+      email: "b@b",
+      password: '456',
+      username: 'haro',
+      firstName: 'jo',
+      lastName: 'mo'
     }
 
     var myInit = {
@@ -70,6 +86,7 @@ class Login extends Component {
   }
 
   render() {
+
     return (
         <Image
           source={require('../img/elements/v2loginlogoonly.png')}
@@ -84,12 +101,12 @@ class Login extends Component {
               placeholder='Password'
             />
 
-            <TouchableHighlight onPress={()=>this._navigate()}>
+            <TouchableHighlight onPress={()=>this._navigate(route.home)}>
               <Text style={{color: '#999999', fontSize: 17.2}}>Login</Text>
             </TouchableHighlight>
 
             <TouchableHighlight
-              onPress={()=>this._navigateRegister()}
+              onPress={()=>this._navigate(route.register)}
             >
               <Text style={{color: '#999999', fontSize: 17.2}}>Register</Text>
             </TouchableHighlight>

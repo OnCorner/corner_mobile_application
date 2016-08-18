@@ -81,7 +81,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    marginTop: 55
+    marginTop: 55,
+    backgroundColor: 'black'
   },
   bottomContainer: {
     flex: 2

@@ -12,14 +12,31 @@ import Swiper from 'react-native-swiper'
 
 import ItemDetail from './ItemDetail'
 
-class FeedViewRow extends Component {
-  _rowPressed(rowData, type='Normal'){
-    this.props.navigator.push({
+const route = {
+  item: {
+    type: 'push',
+    route: {
+      key: 'itemDetail',
+      title: 'ItemDetail',
       component: ItemDetail,
-      name: 'Detail',
-      type: type,
-      passProps:{rowData: rowData}
-    })
+      passProps: {}
+    },
+  }
+}
+
+class FeedViewRow extends Component {
+  // _rowPressed(rowData, type='Normal'){
+  //   this.props.navigator.push({
+  //     component: ItemDetail,
+  //     name: 'Detail',
+  //     type: type,
+  //     passProps:{rowData: rowData}
+  //   })
+  // }
+
+  _navigate(route, rowData){
+    route.route.passProps = {rowData: rowData}
+    this.props._handleNavigate(route)
   }
 
   _contactPressed(){
@@ -57,7 +74,7 @@ class FeedViewRow extends Component {
         {/* Main swipe */}
         <View style={styles.rowContainer}>
           <TouchableHighlight
-            onPress={this._rowPressed.bind(this, rowData, 'Modal')}
+            onPress={this._navigate.bind(this, route.item, rowData)}
             underlayColor='transparent'
           >
             <View style={styles.rowMain}>
@@ -145,7 +162,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   rowContainer: {
-    flex: 1
+    flex: 1,
+    backgroundColor:'black'
   },
   rowMain: {
     flexDirection: 'row',

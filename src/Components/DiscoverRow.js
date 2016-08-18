@@ -16,21 +16,30 @@ import Group from './Group'
 
 var width = Dimensions.get('window').width;
 
+const route = {
+  group: {
+    type: 'push',
+    route: {
+      key: 'group',
+      title: 'Group',
+      component: Group,
+      passProps: {}
+    },
+  }
+}
+
 class DiscoverRow extends Component {
-  _navigate(type='Normal', component, name='', rowData){
-    this.props.navigator.push({
-      component: component,
-      type: type,
-      name: name,
-      passProps: {rowData: rowData}
-    })
+
+  _navigate(route, rowData){
+    route.route.passProps = {rowData: rowData}
+    this.props._handleNavigate(route)
   }
 
-  _likePressed(){
+  _likePressed() {
     console.log('LIKE BUTTON HAS BEEN PRESSED')
   }
 
-  _followPressed(){
+  _followPressed() {
     console.log('FOLLOW BUTTON HAS BEEN PRESSED')
   }
 
@@ -71,7 +80,7 @@ class DiscoverRow extends Component {
                 <Text>Follow</Text>
               </View>
             </View>*/}
-            <TouchableHighlight onPress={()=>{this._navigate(null, Group, null, rowData)}}>
+            <TouchableHighlight onPress={()=>{this._navigate(route.group, rowData)}}>
               <Image
                 source={rowData.image}
                 style={styles.groupThumb}
@@ -81,7 +90,7 @@ class DiscoverRow extends Component {
               <View>
                 <Text style={styles.groupText}>{rowData.group}</Text>
 
-                <TouchableHighlight onPress={()=>{this._navigate(null, Shop, 'Shop')}}>
+                <TouchableHighlight onPress={null}>
                   <Text style={styles.admin}>{rowData.admin}</Text>
                 </TouchableHighlight>
               </View>

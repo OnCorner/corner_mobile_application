@@ -12,6 +12,12 @@ import {
   TouchableHighlight,
   Image
 } from 'react-native';
+import { Provider } from 'react-redux'
+
+import NavigationRootContainer from './src/Containers/navRootContainer'
+
+import configureStore from './src/Store/configureStore'
+const store = configureStore()
 
 import Drawer from 'react-native-drawer'
 
@@ -19,148 +25,11 @@ import Login from './src/Components/Login'
 import Discover from './src/Components/Discover'
 import DrawerPanel from './src/Components/DrawerPanel'
 
-class corner_mobile extends Component {
-  constructor(){
-    super()
-
-    this.openDrawer = this.openDrawer.bind(this)
-  }
-
-  openDrawer(){
-    this._drawer.open()
-  }
-
-  renderScene(route, navigator){
-    this._navigator = navigator
-
-    return (
-        <route.component navigator={navigator} {...route.passProps}/>
-    )
-  }
-
-  configureScene(route, routeStack) {
-    if(route.type === 'Modal'){
-      return Navigator.SceneConfigs.FloatFromBottom
-    }
-    return Navigator.SceneConfigs.PushFromRight
-  }
-
-  getNav = () => {
-    return this._navigator
-  }
-
-  render() {
-    var routeName;
-    if(this.navigator) {
-      const routes = this.navigator.getCurrentRoutes();
-      routeName = routes[routes.length-1].name;
-    }
-
-    console.log(routeName)
-
-    return (
-      <Drawer
-        content={<DrawerPanel getNav={this.getNav}/>}
-        openDrawerOffset={100}
-        ref={(ref) => this._drawer = ref}
-        type='static'
-        tweenHandler={Drawer.tweenPresets.parallax}
-        tapToClose
-        acceptPan
-        negotiatePan
-      >
-        <Navigator
-          configureScene={this.configureScene}
-          initialRoute={{name: 'Login', component: Login}}
-          renderScene={(route, navigator) => this.renderScene(route, navigator)}
-          style={styles.container}
-          navigationBar={
-            <Navigator.NavigationBar
-              style={routeName == 'Detail' ? styles.transNavBar : styles.navBar}
-              routeMapper={NavigationBarRouteMapper(this.openDrawer)}
-            />
-          }
-        />
-      </Drawer>
-    );
-  }
-}
-
-var NavigationBarRouteMapper = openDrawer => ({
-  LeftButton(route, navigator, index, navState){
-    if(route.name == 'Login' || route.name == 'Interests'){
-      return null
-    }
-    else if(route.name == 'Detail' || route.name == 'Register'){
-      return(
-        <TouchableHighlight
-          onPress={()=>{
-              if(index > 0){
-                navigator.pop()
-              }
-            }
-          }
-        >
-          <Text  style={styles.leftNavButtonImg}>X</Text>
-        </TouchableHighlight>
-      )
-    }else{
-      return(
-        <TouchableHighlight
-          onPress={()=>{openDrawer()}}
-        >
-          <Text style={styles.leftNavButtonImg}>○○○</Text>
-        </TouchableHighlight>
-      )
-    }
-  },
-
-  RightButton(route, navigator, index, navState){
-    if(route.name == 'Login' || route.name == 'Register'){
-      return null
-    }
-    else if(route.name == 'Detail'){
-      return(
-        <TouchableHighlight>
-          <Image source={require('./src/img/shareIcon.png')} style={styles.RightNavButtonImg}/>
-        </TouchableHighlight>
-      )
-    }else if(route.name == 'Interests'){
-      return(
-        <TouchableHighlight onPress={()=>{
-            route.name = 'Search'
-          }
-        }>
-          <Image source={require('./src/img/searchIcon.png')} style={styles.RightNavButtonImg}/>
-        </TouchableHighlight>
-      )
-    }else{
-      return(
-        <TouchableHighlight onPress={()=>
-          navigator.push({
-            component: Discover,
-            type: 'Normal',
-            name: 'Discover'
-          })
-        }>
-          <Text style={styles.RightNavButtonImg}> Sell </Text>
-        </TouchableHighlight>
-      )
-    }
-  },
-
-  Title(route, navigator, index, navState){
-    if(route.name == 'Login' || route.name == 'Detail'){
-      return null
-    }else if(route.name == 'Search'){
-      return (<Text style={styles.navBarTitle}> SEARCH BAR
-      </Text>)
-    }else{
-      return (<Text style={styles.navBarTitle}> {route.name}
-      </Text>)
-    }
-  }
-});
+const corner_mobile = () => (
+  <Provider store={store}>
+    <NavigationRootContainer/>
+  </Provider>
+)
 
 const styles = StyleSheet.create({
   container: {

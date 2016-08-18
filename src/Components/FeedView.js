@@ -40,7 +40,7 @@ class FeedView extends Component {
 
   renderRow(rowData){
     return (
-      <FeedViewRow rowData={rowData} navigator={this.props.navigator}/>
+      <FeedViewRow rowData={rowData} _handleNavigate={this.props._handleNavigate}/>
     )
   }
 

@@ -10,28 +10,32 @@ import {
 class ButtonNav extends Component {
   static propTypes = {
     componentName: React.PropTypes.any,
-    navigator: React.PropTypes.any,
+    _handleNavigate: React.PropTypes.any,
+    navKey: React.PropTypes.string,
     pageName: React.PropTypes.string,
-    style: React.PropTypes.object
+    style: React.PropTypes.any
   }
 
-  _navigate(type='Normal'){
-    this.props.navigator.replace({
-      component: this.props.componentName,
-      type: type,
-      name: this.props.pageName
-    })
+  _navigate(route){
+    this.props._handleNavigate(route)
   }
 
   render(){
-    console.log(this.props.navigator)
+    const route = {
+      type: 'push',
+      route: {
+        key: this.props.navKey,
+        title: this.props.pageName,
+        component: this.props.componentName
+      }
+    }
 
     var pr = this.props;
     var st = this.state;
     var styles = pr.style;
 
     return(
-      <TouchableHighlight onPress={() => this._navigate()}>
+      <TouchableHighlight onPress={() => this._navigate(route)}>
         <Text style={styles}>{pr.pageName}</Text>
       </TouchableHighlight>
     )
