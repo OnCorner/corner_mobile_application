@@ -8,7 +8,12 @@
   "dependencies": {
     "react": "15.2.1",
     "react-native": "0.29.2",
+    "react-native-drawer": "^2.2.6",
+    "react-native-scrollable-tab-view": "^0.5.3",
     "react-native-swipeout": "git+https://github.com/magrinj/react-native-swipeout",
-    "react-native-swiper": "^1.4.6"
+    "react-native-swiper": "^1.4.6",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
+    "redux-logger": "^2.6.1"
   }
 }

@@ -7,11 +7,12 @@ import {
   View,
   ListView,
   Image,
-  TouchableHighlight,
-  TouchableOpacity
+  TouchableHighlight
 } from 'react-native';
 
 import Home from './Home'
+import InterestGridCell from './InterestGridCell'
+import InterestGridHeader from './InterestGridHeader'
 
 class Interest extends Component {
   constructor(props){
@@ -36,47 +37,24 @@ class Interest extends Component {
 
   renderRow(rowData){
     return (
-          <View style={this.state.selected ? styles.transItem : styles.opacItem}>
-            <TouchableHighlight
-              onPress={ () => { this.setState({selected: !this.state.selected})}} underlayColor='transparent'>
-              <View>
-                <Image source={rowData.image} style={styles.groupImage}/>
-                <Text>{rowData.brand}</Text>
-                <Text>{rowData.style}</Text>
-              </View>
-            </TouchableHighlight>
-          </View>
+      <InterestGridCell rowData={rowData} />
     )
   }
 
-  _goPressed(type='Normal'){
-    this.props.navigator.replace({
-      component: Home,
-      type: type,
-      name: 'Feed'
-    })
+  renderHeader(){
+    return(
+      <InterestGridHeader _handleNavigate={this.props._handleNavigate}/>
+    )
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.title}>
-          <Text style={styles.titleText}>
-            Select 3 groups from our suggestions to kick off!
-          </Text>
-          <Text/>
-            <TouchableHighlight onPress={()=>this._goPressed()} style={{width:27}} underlayColor='transparent'>
-                <Text style={styles.goButton}>
-                  Go!
-                </Text>
-            </TouchableHighlight>
-          <Text/>
-          <Text style={styles.subTitleText}>
-            Featured
-          </Text>
-        </View>
-
-        <ListView contentContainerStyle={styles.list} dataSource={this.state.dataSource} renderRow={this.renderRow.bind(this)}
+        <ListView
+          contentContainerStyle={styles.list}
+          dataSource={this.state.dataSource}
+          renderRow={this.renderRow.bind(this)}
+          renderHeader={this.renderHeader.bind(this)}
         />
       </View>
     );
@@ -85,50 +63,14 @@ class Interest extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-  },
-  title: {
-    marginTop: 70,
-    marginLeft: 15,
-    marginBottom: 15,
-  },
-  titleText: {
-    color: 'black',
-    fontSize: 17,
-    width: 200
-  },
-  goButton: {
-    color: 'black',
-    fontSize: 17
+    flex: 1,
+    marginTop: 55,
+    backgroundColor: 'black'
   },
   list: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-  },
-  opacItem: {
-    margin: 15,
-    width: 155,
-    height: 175,
-    opacity: 1.0
-  },
-  transItem: {
-    margin: 15,
-    width: 155,
-    height: 175,
-    opacity: 0.5
-  },
-  subTitleText: {
-    color: 'black',
-    fontSize: 17,
-    fontWeight: 'bold'
-  },
-  groupDetail: {
-    width: 60,
-    marginLeft: 15
-  },
-  groupImage: {
-    width: 155,
-    height: 155
+    alignItems: 'center'
   }
 });
 

@@ -12,161 +12,75 @@ import {
   TouchableHighlight,
   Image
 } from 'react-native';
+import { Provider } from 'react-redux'
+
+import NavigationRootContainer from './src/Containers/navRootContainer'
+
+import configureStore from './src/Store/configureStore'
+const store = configureStore()
+
+import Drawer from 'react-native-drawer'
 
 import Login from './src/Components/Login'
 import Discover from './src/Components/Discover'
+import DrawerPanel from './src/Components/DrawerPanel'
 
-class corner_mobile extends Component {
-  renderScene(route, navigator){
-    return <route.component navigator={navigator} {...route.passProps}/>
-  }
-
-  configureScene(route, routeStack) {
-    if(route.type === 'Modal'){
-      return Navigator.SceneConfigs.FloatFromBottom
-    }
-    return Navigator.SceneConfigs.PushFromRight
-  }
-
-  render() {
-    return (
-      <Navigator
-        configureScene={this.configureScene}
-        initialRoute={{name: 'Login', component: Login}}
-        renderScene={this.renderScene}
-        style={styles.container}
-
-        navigationBar={
-          <Navigator.NavigationBar
-            style={styles.navBar}
-            routeMapper={NavigationBarRouteMapper}
-          />
-        }
-      />
-    );
-  }
-}
-
-var NavigationBarRouteMapper = {
-  LeftButton(route, navigator, index, navState){
-    if(route.name == 'Login' || route.name == 'Interests'){
-      return null
-    }
-    else if(route.name == 'Detail' || route.name == 'Register'){
-      return(
-        <TouchableHighlight
-          onPress={()=>{
-              if(index > 0){
-                navigator.pop()
-              }
-            }
-          }
-        >
-          <Image source={require('./src/img/deleteIcon.png')} style={styles.leftNavButtonImg}/>
-        </TouchableHighlight>
-      )
-    }else{
-      return(
-        <TouchableHighlight
-          onPress={()=>{
-              if(index > 0){
-                navigator.pop()
-              }
-            }
-          }
-        >
-          <Image source={require('./src/img/listIcon.png')} style={styles.leftNavButtonImg}/>
-        </TouchableHighlight>
-      )
-    }
-  },
-
-  RightButton(route, navigator, index, navState){
-    if(route.name == 'Login' || route.name == 'Register'){
-      return null
-    }
-    else if(route.name == 'Detail'){
-      return(
-        <TouchableHighlight>
-          <Image source={require('./src/img/shareIcon.png')} style={styles.RightNavButtonImg}/>
-        </TouchableHighlight>
-      )
-    }else if(route.name == 'Interests'){
-      return(
-        <TouchableHighlight onPress={()=>{
-            route.name = 'Search'
-          }
-        }>
-          <Image source={require('./src/img/searchIcon.png')} style={styles.RightNavButtonImg}/>
-        </TouchableHighlight>
-      )
-    }else{
-      return(
-        <TouchableHighlight onPress={()=>
-          navigator.push({
-            component: Discover,
-            type: 'Normal',
-            name: 'Discover'
-          })
-        }>
-          <Image source={require('./src/img/sellIcon.png')} style={styles.RightNavButtonImg}/>
-        </TouchableHighlight>
-      )
-    }
-  },
-
-  Title(route, navigator, index, navState){
-    if(route.name == 'Login' || route.name == 'Detail'){
-      return null
-    }else if(route.name == 'Search'){
-      return (<Text style={styles.navBarTitle}> SEARCH BAR
-      </Text>)
-    }else{
-      return (<Text style={styles.navBarTitle}> {route.name}
-      </Text>)
-    }
-  }
-};
+const corner_mobile = () => (
+  <Provider store={store}>
+    <NavigationRootContainer/>
+  </Provider>
+)
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'black'
   },
   navBar: {
-    height: 60,
-    backgroundColor: 'white'
+    height: 55,
+    backgroundColor: 'black'
+  },
+  transNavBar: {
+    height: 55,
+    backgroundColor: 'transparent'
   },
   navBarTitle: {
-    marginTop: 4,
-    marginRight: 190,
-    fontSize: 20,
-    color: 'black'
-
+    marginTop: 1,
+    marginRight: 211,
+    fontSize: 15,
+    color: '#999999'
   },
   leftNavButtonText: {
     fontSize: 18,
     marginLeft: 13,
     marginTop: 2,
-    color: 'black'
+    color: 'white'
   },
   rightNavButtonText: {
     fontSize: 18,
     marginRight: 13,
     marginTop: 2,
-    color: 'black'
+    color: 'white'
   },
   leftNavButtonImg: {
-    marginLeft: 13,
-    marginTop: 2,
-    width: 27,
-    height: 27
+    marginLeft: 18,
+    width: 16,
+    height: 35,
+    color: '#999999',
+    fontWeight: 'bold',
+    fontSize: 8
   },
   RightNavButtonImg: {
     marginRight: 13,
-    marginTop: 2,
-    width: 27,
-    height: 27
+    width: 27
+  },
+  drawer: {
+    shadowColor: '#000000',
+    shadowOpacity: 0.8,
+    shadowRadius: 3
+  },
+  main: {
+    paddingLeft: 3
   }
 });
 
