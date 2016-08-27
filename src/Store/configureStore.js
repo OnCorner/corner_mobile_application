@@ -10,10 +10,10 @@ export default function configureStore () {
   const store = createStoreWithMiddleware(rootReducer)
 
   if (module.hot) {
-      module.hot.accept(() => {
-        const nextRootReducer = require('../Reducers/index').default
-        store.replaceReducer(nextRootReducer)
-      })
+    module.hot.accept(() => {
+      const nextRootReducer = require('../Reducers/index').default
+      store.replaceReducer(nextRootReducer)
+    })
   }
 
   return store

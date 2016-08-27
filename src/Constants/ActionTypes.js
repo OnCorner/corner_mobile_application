@@ -11,3 +11,6 @@ export const UPDATE_EMAIL = 'UPDATE_EMAIL'
 export const UPDATE_FIRST_NAME = 'UPDATE_FIRST_NAME'
 export const UPDATE_LAST_NAME = 'UPDATE_LAST_NAME'
 export const UPDATE_PASSWORD = 'UPDATE_PASSWORD'
+
+// imageReducer
+export const STORE_IMAGE = 'STORE_IMAGE'

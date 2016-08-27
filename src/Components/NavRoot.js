@@ -137,7 +137,7 @@ class NavRoot extends Component {
   render() {
     return (
       <Drawer
-        content={<DrawerPanel _handleNavigate={this._handleNavigate.bind(this)}/>}
+        content={<DrawerPanel {...this.props} _handleNavigate={this._handleNavigate.bind(this)} storeImage={this.props.storeImage}/>}
         openDrawerOffset={100}
         ref={(ref) => this._drawer = ref}
         type='static'
