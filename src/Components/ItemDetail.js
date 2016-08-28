@@ -8,19 +8,22 @@ import {
   Image,
   Dimensions,
   TouchableHighlight,
-  ListView
+  ListView,
+  Navigator,
+  Alert,
+  Animated,
 } from 'react-native';
+
 import Swiper from 'react-native-swiper'
 
 import ItemDetailComment from './ItemDetailComment'
+import SubviewOrder from './SubviewOrder'
 
 var width = Dimensions.get('window').width;
-
 var height = Dimensions.get('window').height;
-
 var imageHeight = Dimensions.get('window').height / 1.333;
-
 var infoHeight = Dimensions.get('window').height - imageHeight
+var isHidden = true;
 
 class ItemDetail extends Component {
   constructor(props){
@@ -28,24 +31,88 @@ class ItemDetail extends Component {
 
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
-    this.state = {dataSource: ds.cloneWithRows([
-      {username: 'meganmarkel', ratingComment: 'Can you ship to Europe?', image: require('../img/user1.jpg'), rating: 5.0},
-      {username: 'karaguilera', ratingComment: 'Where was it purchased?', image:require('../img/user2.jpg'), rating: 4.5},
-      {username: 'phoebedarcy', ratingComment: 'check this out @lilugleman', image: require('../img/user3.jpeg'), rating: 5.0},
-      {username: 'ghana1994', ratingComment: 'Described as is with top notch quality', image: require('../img/lamboGroup.jpg'), rating: 4.9},
-      {username: 'Berluti', ratingComment: 'always up to date with everything', image: require('../img/item3.jpg'), rating: 5.0},
-      {username: 'Berluti', ratingComment: 'Striped L/S Shirt', image: require('../img/item3.jpg'), rating: 4.9}
-    ])};
+    this.state = {
+      //Where low it should initially start off with (Higher the lower the subview starts)
+      bounceValue: new Animated.Value(167),
+      paymentText: 'Select',
+      affirmText: 'Select',
+      addressText: 'Select',
+      dataSource: ds.cloneWithRows([
+        {username: 'meganmarkel', ratingComment: 'Can you ship to Europe?', image: require('../img/user1.jpg'), rating: 5.0},
+        {username: 'karaguilera', ratingComment: 'Where was it purchased?', image:require('../img/user2.jpg'), rating: 4.5},
+        {username: 'phoebedarcy', ratingComment: 'check this out @lilugleman', image: require('../img/user3.jpeg'), rating: 5.0},
+        {username: 'ghana1994', ratingComment: 'Described as is with top notch quality', image: require('../img/lamboGroup.jpg'), rating: 4.9},
+        {username: 'Berluti', ratingComment: 'always up to date with everything', image: require('../img/item3.jpg'), rating: 5.0},
+        {username: 'Berluti', ratingComment: 'Striped L/S Shirt', image: require('../img/item3.jpg'), rating: 4.9},
+      ])
+    };
+
+    this._buyPressed = this._buyPressed.bind(this);
   }
 
-  renderRow(rowData){
+  renderRow(rowData) {
     return (
       <ItemDetailComment rowData={rowData}/>
     );
   }
 
-  _buyPressed(){
+  _selectPayment() {
+    if(this.state.paymentText == 'Select') {
+      this.setState({
+        paymentText: 'Selected'
+      })
+    } else {
+      this.setState({
+        paymentText: 'Select'
+      })
+    }
+  }
+
+  _selectAffirm() {
+    if(this.state.affirmText == 'Select') {
+      this.setState({
+        affirmText: 'Selected'
+      })
+    } else {
+      this.setState({
+        affirmText: 'Select'
+      })
+    }
+  }
+
+  _selectAddress() {
+    if(this.state.addressText == 'Select') {
+      this.setState({
+        addressText: 'Selected'
+      })
+    } else {
+      this.setState({
+        addressText: 'Select'
+      })
+    }
+  }
+
+  _buyPressed() {
     console.log('BUY HAS BEEN PRESSED')
+
+    //Speed of animation (To what point it goes down to)
+    var toValue = 167;
+
+    if(isHidden) {
+      toValue = 0;
+    }
+
+    Animated.spring(
+      this.state.bounceValue,
+      {
+        toValue: toValue,
+        velocity: 3,
+        tension: 50,
+        friction: 10,
+      }
+    ).start();
+
+    isHidden = !isHidden;
   }
 
   render() {
@@ -122,9 +189,9 @@ class ItemDetail extends Component {
               </TouchableHighlight>
 
               <TouchableHighlight
-                underlayColor='transparent'
-                onPress={this._buyPressed.bind(this)}
+                onPress={this._buyPressed}
                 style={styles.offerButton}
+                underlayColor='transparent'
               >
                 <Text style={styles.offerButtonText}>Offer</Text>
               </TouchableHighlight>
@@ -139,8 +206,13 @@ class ItemDetail extends Component {
               renderRow={this.renderRow.bind(this)}
             />
           </View>
-
         </Swiper>
+        <Animated.View
+          style={[styles.subView,
+            {transform: [{translateY: this.state.bounceValue}]}]}
+        >
+          <SubviewOrder _buyPressed={this._buyPressed}/>
+        </Animated.View>
       </View>
     );
   }
@@ -241,7 +313,16 @@ const styles = StyleSheet.create({
     color: '#999999',
     fontSize: 13,
     fontFamily: 'Helvetica Neue',
-  }
+  },
+  subView: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'black',
+    height: 167,
+    flex: 1,
+  },
 });
 
 export default ItemDetail

@@ -15,6 +15,7 @@ import {
 import Home from './Home'
 import Register from './Register'
 import InputNormal from '../Elements/InputNormal'
+import Style from '../Modules/Style'
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
@@ -86,6 +87,7 @@ class Login extends Component {
   }
 
   render() {
+    console.log(Style)
 
     return (
         <Image
@@ -102,7 +104,7 @@ class Login extends Component {
             />
 
             <TouchableHighlight onPress={()=>this._navigate(route.home)}>
-              <Text style={{color: '#999999', fontSize: 17.2}}>Login</Text>
+              <Text style={Style.text1}>Login</Text>
             </TouchableHighlight>
 
             <TouchableHighlight
