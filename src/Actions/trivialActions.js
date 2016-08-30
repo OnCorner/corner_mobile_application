@@ -2,8 +2,6 @@ import { FETCH_API } from '../Constants/ActionTypes'
 import { STORE_IMAGE } from '../Constants/ActionTypes'
 import Api from '../Modules/Api'
 
-import Api from '../Modules/Api.js'
-
 //fetchReducer
 export function register(userInfo) {
   console.log(userInfo)
@@ -38,13 +36,23 @@ export function register(userInfo) {
   })
 
   return {
-      type: FETCH_API
-    }
+    type: FETCH_API
+  }
 }
 
 export function storeImage(image) {
   return {
     type: STORE_IMAGE,
     image: image,
+  }
+}
+
+export function createItem(itemInfo) {
+  console.log(itemInfo)
+
+  //MAKE THE API CALL HERE (CREATING ITEM) - TAKE A LOOK AT REGISTER FUNCTION AT THE TOP
+
+  return {
+    type: FETCH_API
   }
 }

@@ -8,19 +8,16 @@ import {
   TouchableHighlight,
   Image,
 } from 'react-native';
+var Platform = require('react-native').Platform;
+
+import ImagePicker from 'react-native-image-picker';
 
 import ButtonNav from '../Elements/ButtonNav'
-
 import Home from './Home'
 import Shop from './Shop'
 import Discover from './Discover'
 import Sell from './Sell'
 
-// import Platform from ('react-native').Platform;
-import ImagePicker from 'react-native-image-picker';
-
-var Platform = require('react-native').Platform;
-// More info on all the options is below in the README...just some common use cases shown here
 var options = {
   title: 'Select Avatar',
   customButtons: {
@@ -38,8 +35,11 @@ class DrawerPanel extends Component {
     this.state = {
       avatarSource: ""
     }
+
+    this._selectPhotos = this._selectPhotos.bind(this);
   }
-  photos() {
+
+  _selectPhotos() {
     ImagePicker.showImagePicker(options, (response) => {
       console.log('Response = ', response);
 
@@ -67,10 +67,10 @@ class DrawerPanel extends Component {
       }
     });
   }
+
   render() {
     console.log(this.props)
     var pr = this.props
-    // var navigator = pr._handleNavigate()
 
     console.log("no prev this.props", pr)
     console.log(pr.image.image)
@@ -105,7 +105,7 @@ class DrawerPanel extends Component {
           pageName='Sell'
           style={styles.button}
         />
-        <TouchableHighlight onPress={() => this.photos()}>
+        <TouchableHighlight onPress={this._selectPhotos}>
           <Text style={styles.button}>Sell</Text>
         </TouchableHighlight>
         <Image source={pr.image.image} style={styles.uploadAvatar} />

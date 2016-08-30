@@ -6,15 +6,13 @@ const initialState = {
 
 function imageReducer(state = initialState, action) {
   switch(action.type) {
-
     case STORE_IMAGE:
       return {
         image: action.image
       }
 
-   default:
-     return state
-
+     default:
+       return state
   }
 }
 

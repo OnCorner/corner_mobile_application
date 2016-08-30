@@ -60,7 +60,7 @@ class InputNormal extends Component {
     return (
       <TextInput
         style={{fontWeight: 'bold', height: 20.5, color: '#999999'}}
-        palceholderStyle={{fontWeight: 'bold'}}
+        placeholderStyle={{fontWeight: 'bold'}}
         placeholderTextColor='#999999'
         placeholder={pr.placeholder}
         onChangeText={pr.onChangeText}
@@ -69,14 +69,5 @@ class InputNormal extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    marginLeft: 15,
-  }
-});
 
 export default InputNormal

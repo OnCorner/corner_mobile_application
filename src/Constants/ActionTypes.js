@@ -12,5 +12,16 @@ export const UPDATE_FIRST_NAME = 'UPDATE_FIRST_NAME'
 export const UPDATE_LAST_NAME = 'UPDATE_LAST_NAME'
 export const UPDATE_PASSWORD = 'UPDATE_PASSWORD'
 
-// imageReducer
+//imageReducer
 export const STORE_IMAGE = 'STORE_IMAGE'
+
+//itemReducer
+export const ITEM_GROUP = 'ITEM_GROUP'
+export const ITEM_QUANTITY = 'ITEM_QUANTITY'
+export const ITEM_CONDITION = 'ITEM_CONDITION'
+export const ITEM_PRICE = 'ITEM_PRICE'
+export const ITEM_ACCEPTING_OFFER = 'ITEM_ACCEPTING_OFFER'
+export const ITEM_LOCATION = 'ITEM_LOCATION'
+export const ITEM_MEET_UP = 'ITEM_MEET_UP'
+export const ITEM_SHIPPING = 'ITEM_SHIPPING'
+export const ITEM_FREE_SHIPPING = 'ITEM_FREE_SHIPPING'

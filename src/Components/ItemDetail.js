@@ -31,6 +31,8 @@ class ItemDetail extends Component {
 
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
+    this._buyPressed = this._buyPressed.bind(this);
+
     this.state = {
       //Where low it should initially start off with (Higher the lower the subview starts)
       bounceValue: new Animated.Value(167),
@@ -46,8 +48,6 @@ class ItemDetail extends Component {
         {username: 'Berluti', ratingComment: 'Striped L/S Shirt', image: require('../img/item3.jpg'), rating: 4.9},
       ])
     };
-
-    this._buyPressed = this._buyPressed.bind(this);
   }
 
   renderRow(rowData) {

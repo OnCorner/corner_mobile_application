@@ -133,7 +133,6 @@ class NavRoot extends Component {
     }
   }
 
-
   render() {
     return (
       <Drawer

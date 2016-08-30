@@ -7,13 +7,11 @@ const initialState = {
 
 function fetchReducer(state = initialState, action) {
   switch(action.type) {
-
     case FETCH_API:
       return state
 
-   default:
-     return state
-
+     default:
+       return state
   }
 }
 

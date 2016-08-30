@@ -9,7 +9,6 @@ const initialState = {
 
 function inputReducer(state = initialState, action) {
   switch(action.type) {
-
     case UPDATE_USERNAME:
       return {
         ...state,
@@ -40,9 +39,8 @@ function inputReducer(state = initialState, action) {
         password: action.password
       }
 
-   default:
-     return state
-
+     default:
+       return state
   }
 }
 
