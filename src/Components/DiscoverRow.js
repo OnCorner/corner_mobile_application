@@ -23,6 +23,7 @@ const route = {
       key: 'group',
       title: 'Group',
       component: Group,
+      direction: 'vertical',
       passProps: {}
     },
   }

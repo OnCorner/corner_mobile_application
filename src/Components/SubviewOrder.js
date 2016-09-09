@@ -20,72 +20,34 @@ class SubviewOrder extends Component {
       affirmText: 'Select',
       addressText: 'Select',
       //Where low it should initially start off with (Higher the lower the subview starts)
-      bounceValue: new Animated.Value(179),
+      paymentSelect: false,
+      addressSelect: false,
+      affirmSelect: false,
     };
 
     this._selectPayment = this._selectPayment.bind(this);
     this._selectAffirm = this._selectAffirm.bind(this);
     this._selectAddress = this._selectAddress.bind(this);
-    this._showSubView = this._showSubView.bind(this);
   }
 
   _selectPayment() {
-    if(this.state.paymentText == 'Select') {
-      this.setState({
-        paymentText: 'Selected'
-      })
-    } else {
-      this.setState({
-        paymentText: 'Select'
-      })
-    }
+    this.props._paymentPressed()
 
-    this._showSubView()
+    this.setState({
+      paymentSelect: !this.state.paymentSelect
+    })
   }
 
   _selectAffirm() {
-    if(this.state.affirmText == 'Select') {
-      this.setState({
-        affirmText: 'Selected'
-      })
-    } else {
-      this.setState({
-        affirmText: 'Select'
-      })
-    }
+    this.setState({
+      affirmSelect: !this.state.affirmSelect
+    })
   }
 
   _selectAddress() {
-    if(this.state.addressText == 'Select') {
-      this.setState({
-        addressText: 'Selected'
-      })
-    } else {
-      this.setState({
-        addressText: 'Select'
-      })
-    }
-  }
-
-  _showSubView() {
-    //Speed of animation (To what point it goes down to)
-    var toValue = 179;
-
-    if(isHidden) {
-      toValue = 0;
-    }
-
-    Animated.spring(
-      this.state.bounceValue,
-      {
-        toValue: toValue,
-        velocity: 3,
-        tension: 50,
-        friction: 10,
-      }
-    ).start();
-
-    isHidden = !isHidden;
+    this.setState({
+      addressSelect: !this.state.addressSelect
+    })
   }
 
   render() {
@@ -109,6 +71,9 @@ class SubviewOrder extends Component {
           >
             <Text style={styles.paymentText}>Payment</Text>
             <View style={{alignItems: 'center', flexDirection: 'row'}}>
+              <Text style={styles.ccText}>
+              Visa **** 1234
+              </Text>
               <TouchableHighlight
                 underlayColor='transparent'
                 style={{marginRight: 15}}
@@ -119,7 +84,28 @@ class SubviewOrder extends Component {
                 underlayColor='transparent'
                 onPress={this._selectPayment}
               >
-                <Text style={styles.paymentSelectButton}>{this.state.paymentText}</Text>
+                <View style={{
+                    height: 23,
+                    width: 23,
+                    borderRadius: 15,
+                    borderWidth: 1,
+                    borderColor: '#999999',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {
+                    this.state.paymentSelect ?
+                      <View style={{
+                          height: 15,
+                          width: 15,
+                          borderRadius: 8,
+                          backgroundColor: '#999999',
+                        }}
+                      />
+                    : null
+                  }
+                </View>
               </TouchableHighlight>
             </View>
           </View>
@@ -132,6 +118,11 @@ class SubviewOrder extends Component {
           >
             <Text style={styles.paymentText}>Affirm</Text>
             <View style={{alignItems: 'center', flexDirection: 'row'}}>
+              <Text style={styles.affirmText}>
+                <Text style={{fontWeight: 'bold'}}>
+                  Monthly Payment •
+                </Text> $12.60/mo
+              </Text>
               <TouchableHighlight
                 underlayColor='transparent'
                 style={{marginRight: 15}}
@@ -142,7 +133,28 @@ class SubviewOrder extends Component {
                 underlayColor='transparent'
                 onPress={this._selectAffirm}
               >
-                <Text style={styles.paymentSelectButton}>{this.state.affirmText}</Text>
+                <View style={{
+                    height: 23,
+                    width: 23,
+                    borderRadius: 15,
+                    borderWidth: 1,
+                    borderColor: '#999999',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {
+                    this.state.affirmSelect ?
+                      <View style={{
+                          height: 15,
+                          width: 15,
+                          borderRadius: 8,
+                          backgroundColor: '#999999',
+                        }}
+                      />
+                    : null
+                  }
+                </View>
               </TouchableHighlight>
             </View>
           </View>
@@ -155,6 +167,9 @@ class SubviewOrder extends Component {
           >
             <Text style={styles.paymentText}>Address</Text>
             <View style={{alignItems: 'center', flexDirection: 'row'}}>
+              <Text style={styles.addressText}>
+              1 Ugleman, 90007
+              </Text>
               <TouchableHighlight
                 underlayColor='transparent'
                 style={{marginRight: 15}}
@@ -165,7 +180,28 @@ class SubviewOrder extends Component {
                 underlayColor='transparent'
                 onPress={this._selectAddress}
               >
-                <Text style={styles.paymentSelectButton}>{this.state.addressText}</Text>
+                <View style={{
+                    height: 23,
+                    width: 23,
+                    borderRadius: 15,
+                    borderWidth: 1,
+                    borderColor: '#999999',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {
+                    this.state.addressSelect ?
+                      <View style={{
+                          height: 15,
+                          width: 15,
+                          borderRadius: 8,
+                          backgroundColor: '#999999',
+                        }}
+                      />
+                    : null
+                  }
+                </View>
               </TouchableHighlight>
             </View>
           </View>
@@ -185,20 +221,6 @@ class SubviewOrder extends Component {
             </TouchableHighlight>
           </View>
         </View>
-        <Animated.View
-          style={[styles.subView,
-            {transform: [{translateY: this.state.bounceValue}]}]}
-        >
-          <View>
-            <TouchableHighlight
-              onPress={this._showSubView}
-              style={{marginLeft: 15, marginTop: 9.5, marginBottom: 3.5}}
-              underlayColor='transparent'
-            >
-              <Text style={{color: 'black', fontSize: 13}}>X</Text>
-            </TouchableHighlight>
-          </View>
-        </Animated.View>
       </View>
     );
   }
@@ -265,6 +287,24 @@ const styles = StyleSheet.create({
     backgroundColor: 'pink',
     height: 167,
     flex: 1,
+  },
+  addressText: {
+    color: '#999999',
+    fontSize: 13,
+    fontFamily: 'Helvetica Neue',
+    marginRight: 15
+  },
+  affirmText: {
+    color: '#999999',
+    fontSize: 13,
+    fontFamily: 'Helvetica Neue',
+    marginRight: 15
+  },
+  ccText: {
+    color: '#999999',
+    fontSize: 13,
+    fontFamily: 'Helvetica Neue',
+    marginRight: 15
   },
 });
 

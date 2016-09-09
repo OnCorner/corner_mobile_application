@@ -21,7 +21,8 @@ const route = {
     route: {
       key: 'interest',
       title: 'Interest',
-      component: Interest
+      component: Interest,
+      direction: 'horizontal',
     }
   }
 }

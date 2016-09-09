@@ -25,8 +25,10 @@ const {
 class NavRoot extends Component {
   constructor(props) {
     super(props)
+
     this._renderScene = this._renderScene.bind(this)
     this._handleBackAction = this._handleBackAction.bind(this)
+    this._handleNavigate = this._handleNavigate.bind(this)
   }
   componentDidMount() {
     BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)
@@ -37,12 +39,15 @@ class NavRoot extends Component {
   _renderScene (props) {
     const { route } = props.scene
 
-    console.log('REGISTER START')
+    console.log('PROPS CHECKING START')
+    console.log(props)
     console.log(this.props)
-    console.log('REGISTER END')
+    console.log('PROPS CHECKING END')
 
+
+    //Try {...this.props}
     return (
-      <route.component _handleNavigate={this._handleNavigate.bind(this)} {...route.passProps} actions={this.props}/>
+      <route.component _handleNavigate={this._handleNavigate} {...route.passProps} actions={this.props}/>
     )
   }
 
@@ -68,10 +73,6 @@ class NavRoot extends Component {
   }
 
   renderOverlay = (sceneProps) => {
-    console.log(sceneProps)
-    console.log('This is next props')
-    console.log(this.props)
-
     if(0 < sceneProps.scene.index)
     {
       return (
@@ -134,9 +135,12 @@ class NavRoot extends Component {
   }
 
   render() {
+    console.log('THIS IS THE STARTING ROOT PROPS')
+    console.log(this.props)
+    console.log('THIS IS THE ENDING ROOT PROPS')
     return (
       <Drawer
-        content={<DrawerPanel {...this.props} _handleNavigate={this._handleNavigate.bind(this)} storeImage={this.props.storeImage}/>}
+        content={<DrawerPanel {...this.props} _handleNavigate={this._handleNavigate} storeImage={this.props.storeImage}/>}
         openDrawerOffset={100}
         ref={(ref) => this._drawer = ref}
         type='static'
@@ -146,9 +150,9 @@ class NavRoot extends Component {
         negotiatePan
       >
         <NavigationCardStack
-          direction='horizontal'
+          direction={this.props.navigation.routes[this.props.navigation.index].direction}
           navigationState={this.props.navigation}
-          onNavigate={this._handleNavigate.bind(this)}
+          onNavigate={this._handleNavigate}
           renderScene={this._renderScene}
           renderOverlay={this.renderOverlay}
           style={styles.container}

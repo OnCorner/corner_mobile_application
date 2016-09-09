@@ -18,12 +18,14 @@ import Swiper from 'react-native-swiper'
 
 import ItemDetailComment from './ItemDetailComment'
 import SubviewOrder from './SubviewOrder'
+import SubviewPayment from './SubviewPayment'
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 var imageHeight = Dimensions.get('window').height / 1.333;
 var infoHeight = Dimensions.get('window').height - imageHeight
 var isHidden = true;
+var isHiddenSecond = true;
 
 class ItemDetail extends Component {
   constructor(props){
@@ -32,10 +34,12 @@ class ItemDetail extends Component {
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
     this._buyPressed = this._buyPressed.bind(this);
+    this._paymentPressed = this._paymentPressed.bind(this);
 
     this.state = {
       //Where low it should initially start off with (Higher the lower the subview starts)
       bounceValue: new Animated.Value(167),
+      bounceValueSecond: new Animated.Value(167),
       paymentText: 'Select',
       affirmText: 'Select',
       addressText: 'Select',
@@ -113,6 +117,27 @@ class ItemDetail extends Component {
     ).start();
 
     isHidden = !isHidden;
+  }
+
+  _paymentPressed() {
+    //Speed of animation (To what point it goes down to)
+    var toValue = 167;
+
+    if(isHiddenSecond) {
+      toValue = 0;
+    }
+
+    Animated.spring(
+      this.state.bounceValueSecond,
+      {
+        toValue: toValue,
+        velocity: 3,
+        tension: 50,
+        friction: 10,
+      }
+    ).start();
+
+    isHiddenSecond = !isHiddenSecond;
   }
 
   render() {
@@ -211,7 +236,13 @@ class ItemDetail extends Component {
           style={[styles.subView,
             {transform: [{translateY: this.state.bounceValue}]}]}
         >
-          <SubviewOrder _buyPressed={this._buyPressed}/>
+          <SubviewOrder _buyPressed={this._buyPressed} _paymentPressed={this._paymentPressed}/>
+        </Animated.View>
+        <Animated.View
+          style={[styles.subViewSecond,
+            {transform: [{translateY: this.state.bounceValueSecond}]}]}
+        >
+          <SubviewPayment _paymentPressed={this._paymentPressed}/>
         </Animated.View>
       </View>
     );
@@ -315,6 +346,15 @@ const styles = StyleSheet.create({
     fontFamily: 'Helvetica Neue',
   },
   subView: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'black',
+    height: 167,
+    flex: 1,
+  },
+  subViewSecond: {
     position: "absolute",
     bottom: 0,
     left: 0,

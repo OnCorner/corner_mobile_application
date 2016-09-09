@@ -19,6 +19,7 @@ const route = {
       key: 'itemDetail',
       title: 'ItemDetail',
       component: ItemDetail,
+      direction: 'vertical',
       passProps: {}
     },
   }

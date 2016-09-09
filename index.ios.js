@@ -19,12 +19,6 @@ import NavigationRootContainer from './src/Containers/navRootContainer'
 import configureStore from './src/Store/configureStore'
 const store = configureStore()
 
-import Drawer from 'react-native-drawer'
-
-import Login from './src/Components/Login'
-import Discover from './src/Components/Discover'
-import DrawerPanel from './src/Components/DrawerPanel'
-
 const corner_mobile = () => (
   <Provider store={store}>
     <NavigationRootContainer/>

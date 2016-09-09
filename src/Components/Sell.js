@@ -95,6 +95,9 @@ class Sell extends Component {
   }
 
   render() {
+    console.log('INNER STARTING PROPS')
+    console.log(this.props)
+    console.log('INNER ENDING PROPS')
     var itemInfo = this.props.actions.itemInfo
 
     return (

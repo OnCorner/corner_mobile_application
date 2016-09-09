@@ -80,6 +80,7 @@ class DrawerPanel extends Component {
         <ButtonNav
           componentName={Home}
           _handleNavigate={pr._handleNavigate}
+          _handleBackAction={pr._handleBackAction}
           navKey='home'
           pageName='Home'
           style={styles.button}
@@ -87,6 +88,7 @@ class DrawerPanel extends Component {
         <ButtonNav
           componentName={Shop}
           _handleNavigate={pr._handleNavigate}
+          _handleBackAction={pr._handleBackAction}
           navKey='shop'
           pageName='Shop'
           style={styles.button}
@@ -94,6 +96,7 @@ class DrawerPanel extends Component {
         <ButtonNav
           componentName={Discover}
           _handleNavigate={pr._handleNavigate}
+          _handleBackAction={pr._handleBackAction}
           navKey='discover'
           pageName='Discover'
           style={styles.button}
@@ -101,6 +104,7 @@ class DrawerPanel extends Component {
         <ButtonNav
           componentName={Sell}
           _handleNavigate={pr._handleNavigate}
+          _handleBackAction={pr._handleBackAction}
           navKey='sell'
           pageName='Sell'
           style={styles.button}

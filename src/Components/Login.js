@@ -26,7 +26,8 @@ const route = {
     route: {
       key: 'home',
       title: 'Home',
-      component: Home
+      component: Home,
+      direction: 'horizontal',
     }
   },
 
@@ -35,7 +36,8 @@ const route = {
     route: {
       key: 'register',
       title: 'Register',
-      component: Register
+      component: Register,
+      direction: 'vertical',
     }
   }
 }

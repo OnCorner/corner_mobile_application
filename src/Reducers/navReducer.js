@@ -13,7 +13,8 @@ const initialState = {
   routes: [{
    key: 'login',
    title: 'Login',
-   component: Login
+   component: Login,
+   direction: 'horizontal',
   }]
 }
 
