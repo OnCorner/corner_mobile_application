@@ -26,7 +26,7 @@ class ButtonNav extends Component {
       route: {
         key: this.props.navKey,
         title: this.props.pageName,
-        component: this.props.componentName
+        component: this.props.componentName,
       }
     }
 

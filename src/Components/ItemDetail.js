@@ -12,6 +12,8 @@ import {
   Navigator,
   Alert,
   Animated,
+  StatusBar,
+
 } from 'react-native';
 
 import Swiper from 'react-native-swiper'
@@ -35,11 +37,14 @@ class ItemDetail extends Component {
 
     this._buyPressed = this._buyPressed.bind(this);
     this._paymentPressed = this._paymentPressed.bind(this);
+    this._showNotification = this._showNotification.bind(this);
+    this._hideNotification = this._hideNotification.bind(this);
 
     this.state = {
       //Where low it should initially start off with (Higher the lower the subview starts)
       bounceValue: new Animated.Value(167),
       bounceValueSecond: new Animated.Value(167),
+      slideAnimation: new Animated.Value(22),
       paymentText: 'Select',
       affirmText: 'Select',
       addressText: 'Select',
@@ -58,6 +63,24 @@ class ItemDetail extends Component {
     return (
       <ItemDetailComment rowData={rowData}/>
     );
+  }
+
+  _showNotification() {
+    StatusBar.setHidden(true, 'slide');
+
+    Animated.timing(
+      this.state.slideAnimation,
+      {toValue: 0, duration: 300}
+    ).start();
+  }
+
+  _hideNotification() {
+    StatusBar.setHidden(false, 'slide');
+
+    Animated.timing(
+      this.state.slideAnimation,
+      {toValue: 22, duration: 300}
+    ).start();
   }
 
   _selectPayment() {
@@ -145,6 +168,12 @@ class ItemDetail extends Component {
 
     return (
       <View>
+        <StatusBar barStyle="default"/>
+
+        <Animated.View style={[styles.notification, {top: this.state.slideAnimation}]}>
+          <Text style={styles.notifcationText}>This is a notification</Text>
+        </Animated.View>
+
         <Swiper
           style={styles.wrapper}
           loop={false}
@@ -177,7 +206,6 @@ class ItemDetail extends Component {
         </Swiper>
 
         <Swiper
-          style={styles.wrapper}
           height={infoHeight}
           onMomentumScrollEnd={function(e, state, context){console.log('index:', state.index)}}
 
@@ -242,7 +270,7 @@ class ItemDetail extends Component {
           style={[styles.subViewSecond,
             {transform: [{translateY: this.state.bounceValueSecond}]}]}
         >
-          <SubviewPayment _paymentPressed={this._paymentPressed}/>
+          <SubviewPayment _paymentPressed={this._paymentPressed} _showNotification={this._showNotification}/>
         </Animated.View>
       </View>
     );
@@ -255,7 +283,7 @@ const styles = StyleSheet.create({
     height: imageHeight
   },
   wrapper: {
-
+    backgroundColor: 'pink', //This is important to hide the notification, because it is actually behind it,
   },
   slideImage: {
     flex: 1,
@@ -362,6 +390,21 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     height: 167,
     flex: 1,
+  },
+  notification: {
+    backgroundColor: 'black',
+    position: 'absolute',
+    top: 22, //Move the notification downwards to setup the scene.
+    left: 0,
+    right: 0,
+    height: 22, //Make it the same height as the status bar
+    zIndex: 0.5, //This is what makes the notification benhind the container
+  },
+  notifcationText: {
+    color: 'yellow',
+    textAlign: 'center',
+    fontSize: 11,
+    marginTop: 4,
   },
 });
 

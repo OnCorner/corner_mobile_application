@@ -28,8 +28,8 @@ const currentInfo = {
 }
 
 export default class Sell extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     // this._addItem = this._addItem.bind(this)
     this._handleGroup = this._handleGroup.bind(this)
@@ -45,59 +45,64 @@ export default class Sell extends Component {
 
   _handleGroup(text) {
     currentInfo.group = text
-    this.props.actions.itemGroup(text)
+    this.props.itemGroup(text)
   }
 
   _handleQuantity(value) {
     currentInfo.quantity = value
-    this.props.actions.itemQuantity(value)
+    this.props.itemQuantity(value)
   }
 
   _handleCondition(text) {
     currentInfo.condition = text
-    this.props.actions.itemCondition(text)
+    this.props.itemCondition(text)
   }
 
   _handlePrice(value) {
     currentInfo.acceptingOffer = value
-    this.props.actions.itemPrice(value)
+    this.props.itemPrice(value)
   }
 
   _handleAcceptOffer(value) {
     currentInfo.price = value
-    this.props.actions.itemAcceptingOffer(value)
+    this.props.itemAcceptingOffer(value)
   }
 
   _handleLocation(value) {
     currentInfo.location = value
-    this.props.actions.itemLocation(value)
+    this.props.itemLocation(value)
   }
 
   _handleMeetUp(value) {
     currentInfo.meetUp = value
-    this.props.actions.itemMeetUp(value)
+    this.props.itemMeetUp(value)
   }
 
   _handleShipping(value) {
     currentInfo.shipping = value
-    this.props.actions.itemShipping(value)
+    this.props.itemShipping(value)
   }
 
   _handleFreeShipping(value) {
     currentInfo.freeShipping = value
-    this.props.actions.itemFreeShipping(value)
+    this.props.itemFreeShipping(value)
   }
 
   _addItem() {
     console.log(currentInfo)
-    this.props.actions.createItem(currentInfo)
+    this.props.createItem(currentInfo)
+  }
+
+  componentWillReceiveProps(props) {
+    console.log('THIS IS ONLY FOR TESTING')
+    console.log(props)
   }
 
   render() {
-    console.log('INNER STARTING PROPS')
-    console.log(this.props)
-    console.log('INNER ENDING PROPS')
-    var itemInfo = this.props.actions.itemInfo
+    // console.log('INNER STARTING PROPS')
+    // console.log(this.props)
+    // console.log('INNER ENDING PROPS')
+    var itemInfo = this.props.itemInfo
 
     return (
       <View style={styles.container}>
@@ -158,7 +163,7 @@ export default class Sell extends Component {
           value={itemInfo.freeShipping}
         />
 
-        <TouchableHighlight onPress={()=>this._addItem(this.props.actions.itemInfo)}>
+        <TouchableHighlight onPress={()=>this._addItem(this.props.itemInfo)}>
           <Text style={{color: 'black', fontSize: 17.2}}>Add Item</Text>
         </TouchableHighlight>
       </View>

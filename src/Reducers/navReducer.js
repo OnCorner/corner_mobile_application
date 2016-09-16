@@ -14,11 +14,20 @@ const initialState = {
    key: 'login',
    title: 'Login',
    component: Login,
+   unique: true,
    direction: 'horizontal',
   }]
 }
 
 function navigationState (state = initialState, action) {
+  if(action.type == PUSH_ROUTE && action.route.unique==true)
+  {
+     if(state.routes.find(child => child.key === key))
+     {
+        return NavigationStateUtils.jumpTo(state, action.route.key)
+     }
+  }
+
   switch(action.type) {
     case PUSH_ROUTE:
       if (state.routes[state.index].key === (action.route && action.route.key)) return state
@@ -30,7 +39,6 @@ function navigationState (state = initialState, action) {
 
    default:
      return state
-
   }
 }
 

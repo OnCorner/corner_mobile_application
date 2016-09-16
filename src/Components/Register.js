@@ -22,7 +22,7 @@ const route = {
       key: 'interest',
       title: 'Interest',
       component: Interest,
-      direction: 'horizontal',
+      direction: 'horizontal'
     }
   }
 }

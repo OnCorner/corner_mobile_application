@@ -89,7 +89,7 @@ class Login extends Component {
   }
 
   render() {
-    console.log(Style)
+    // console.log(Style)
 
     return (
         <Image
