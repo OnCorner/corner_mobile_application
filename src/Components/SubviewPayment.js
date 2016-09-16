@@ -28,6 +28,7 @@ class SubviewPayment extends Component {
     this.setState({
       ccSelect: !this.state.ccSelect
     })
+    this.props._showNotification()
   }
 
   render() {

@@ -69,11 +69,11 @@ class DrawerPanel extends Component {
   }
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     var pr = this.props
 
-    console.log("no prev this.props", pr)
-    console.log(pr.image.image)
+    // console.log("no prev this.props", pr)
+    // console.log(pr.image.image)
 
     return (
       <View style={styles.container}>

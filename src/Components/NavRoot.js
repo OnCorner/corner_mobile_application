@@ -30,24 +30,26 @@ class NavRoot extends Component {
     this._handleBackAction = this._handleBackAction.bind(this)
     this._handleNavigate = this._handleNavigate.bind(this)
   }
+
   componentDidMount() {
     BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)
   }
+
   componentWillUnmount() {
     BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction)
   }
+
   _renderScene (props) {
     const { route } = props.scene
 
-    console.log('PROPS CHECKING START')
-    console.log(props)
-    console.log(this.props)
-    console.log('PROPS CHECKING END')
-
+    // console.log('PROPS CHECKING START')
+    // console.log(props)
+    // console.log(this.props)
+    // console.log('PROPS CHECKING END')
 
     //Try {...this.props}
     return (
-      <route.component _handleNavigate={this._handleNavigate} {...route.passProps} actions={this.props}/>
+      <route.component _handleNavigate={this._handleNavigate} {...route.passProps} {...this.props}/>
     )
   }
 
@@ -135,9 +137,9 @@ class NavRoot extends Component {
   }
 
   render() {
-    console.log('THIS IS THE STARTING ROOT PROPS')
-    console.log(this.props)
-    console.log('THIS IS THE ENDING ROOT PROPS')
+    // console.log('THIS IS THE STARTING ROOT PROPS')
+    // console.log(this.props)
+    // console.log('THIS IS THE ENDING ROOT PROPS')
     return (
       <Drawer
         content={<DrawerPanel {...this.props} _handleNavigate={this._handleNavigate} storeImage={this.props.storeImage}/>}

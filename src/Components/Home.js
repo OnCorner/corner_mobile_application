@@ -11,6 +11,9 @@ import {
 import FeedView from './FeedView'
 
 class Home extends Component {
+
+  //Try calling actions in here to see if it gets rerendered
+
   render() {
     return (
       <View style={styles.container}>
