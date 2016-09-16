@@ -65,6 +65,7 @@ class InputNormal extends Component {
         placeholder={pr.placeholder}
         onChangeText={pr.onChangeText}
         value={value}
+        keyboardType={pr.keyboardType ? pr.keyboardType : "default"}
       />
     );
   }

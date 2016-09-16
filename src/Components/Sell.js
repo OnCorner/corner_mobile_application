@@ -14,7 +14,6 @@ import {
 } from 'react-native';
 
 import InputNormal from '../Elements/InputNormal'
-import InputNumberPad from '../Elements/InputNumberPad'
 
 const currentInfo = {
   group: '',
@@ -28,7 +27,7 @@ const currentInfo = {
   freeShipping: null,
 }
 
-class Sell extends Component {
+export default class Sell extends Component {
   constructor() {
     super()
 
@@ -108,8 +107,9 @@ class Sell extends Component {
           value={itemInfo.group}
         />
 
-        <InputNumberPad
+        <InputNormal
           placeholder='Quantity'
+          keyboardType="number-pad"
           onChangeText={this._handleQuantity}
           value={itemInfo.quantity}
         />
@@ -120,8 +120,9 @@ class Sell extends Component {
           value={itemInfo.condition}
         />
 
-        <InputNumberPad
+        <InputNormal
           placeholder='Price'
+          keyboardType="number-pad"
           onChangeText={this._handlePrice}
           value={itemInfo.price}
         />
@@ -132,8 +133,9 @@ class Sell extends Component {
           value={itemInfo.acceptOffer}
         />
 
-        <InputNumberPad
+        <InputNormal
           placeholder='My Location'
+          keyboardType="number-pad"
           onChangeText={this._handleLocation}
           value={itemInfo.location}
         />
@@ -171,5 +173,3 @@ const styles = StyleSheet.create({
     marginTop: 55
   }
 });
-
-export default Sell
