@@ -34,6 +34,10 @@ class Sell extends Component {
     console.log('WHAT IS THIS')
     console.log(props)
 
+    this.state = {
+      avatarSource: "",
+    }
+
     // this._addItem = this._addItem.bind(this)
     this._handleGroup = this._handleGroup.bind(this)
     this._handleQuantity = this._handleQuantity.bind(this)
@@ -44,6 +48,36 @@ class Sell extends Component {
     this._handleMeetUp = this._handleMeetUp.bind(this)
     this._handleShipping = this._handleShipping.bind(this)
     this._handleFreeShipping = this._handleFreeShipping.bind(this)
+    this._selectPhotos = this._selectPhotos.bind(this);
+  }
+
+  _selectPhotos() {
+    ImagePicker.showImagePicker(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      }
+      else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      }
+      else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      }
+      else {
+        // You can display the image using either data...
+        const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
+
+        // or a reference to the platform specific asset location
+        if (Platform.OS === 'ios') {
+          const source = {uri: response.uri.replace('file://', ''), isStatic: true};
+        } else {
+          const source = {uri: response.uri, isStatic: true};
+        }
+
+        this.props.storeImage(source);
+      }
+    });
   }
 
   _handleGroup(text) {
@@ -107,8 +141,15 @@ class Sell extends Component {
     // console.log('INNER ENDING PROPS')
     var itemInfo = this.props.itemInfo
 
+    console.log('THIS IS PROPS FOR IMAGE')
+    console.log(this.props)
+
     return (
       <View style={styles.container}>
+
+        <TouchableHighlight onPress={this._selectPhotos}>
+          <Text style={styles.button}>Add Image</Text>
+        </TouchableHighlight>
         <InputNormal
           placeholder='Group'
           onChangeText={this._handleGroup}
@@ -176,7 +217,12 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 100,
     marginTop: 55
-  }
+  },
+  button: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: '#AAAAAA'
+  },
 });
 
 export default Sell

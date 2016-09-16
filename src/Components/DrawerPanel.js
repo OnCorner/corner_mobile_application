@@ -109,10 +109,6 @@ class DrawerPanel extends Component {
           pageName='Sell'
           style={styles.button}
         />
-        <TouchableHighlight onPress={this._selectPhotos}>
-          <Text style={styles.button}>Sell</Text>
-        </TouchableHighlight>
-        <Image source={pr.image.image} style={styles.uploadAvatar} />
       </View>
     );
   }
