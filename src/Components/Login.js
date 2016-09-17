@@ -17,32 +17,43 @@ import Register from './Register'
 import InputNormal from '../Elements/InputNormal'
 import Style from '../Modules/Style'
 
-var width = Dimensions.get('window').width;
-var height = Dimensions.get('window').height;
+export default class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.width = Dimensions.get('window').width;
+    this.height = Dimensions.get('window').height;
 
-const route = {
-  home: {
-    type: 'push',
-    route: {
-      key: 'home',
-      title: 'Home',
-      component: Home,
-      direction: 'horizontal',
-    }
-  },
+    this.route = {
+      home: {
+        type: 'push',
+        route: {
+          key: 'home',
+          title: 'Home',
+          component: Home,
+          direction: 'horizontal',
+        }
+      },
 
-  register: {
-    type: 'push',
-    route: {
-      key: 'register',
-      title: 'Register',
-      component: Register,
-      direction: 'vertical',
+      register: {
+        type: 'push',
+        route: {
+          key: 'register',
+          title: 'Register',
+          component: Register,
+          direction: 'vertical',
+        }
+      }
     }
   }
-}
 
-class Login extends Component {
+  componentWillMount() {
+    console.log("this.props", this.props);
+  }
+
+  componentDidMount() {
+    console.log("this.props", this.props);
+  }
+
   _navigate(route) {
     this.props._handleNavigate(route)
   }
@@ -55,71 +66,48 @@ class Login extends Component {
   //   })
   // }
 
-  _connectDB() {
-    var data = {
-      email: "b@b",
-      password: '456',
-      username: 'haro',
-      firstName: 'jo',
-      lastName: 'mo'
-    }
+  _handleCurrentUsername(text) {
+    this.props.setUsername(text)
+  }
 
-    var myInit = {
-      method: 'POST',
-      mode: 'cors',
-      body: JSON.stringify(data),
-    };
-
-    fetch('http://localhost:1337/user/create/', myInit)
-    .then(result=>result.json())
-    .then(user=>{
-      console.log(user);
-      Session.user = user;
-    })
-    .done(()=>{
-      myInit = { method: 'GET',
-                 mode: 'cors'};
-
-      fetch('http://localhost:1337/user/find/', myInit)
-      .then(result=>result.json())
-      .then(users=>{
-        console.log(users);
-      });
-    })
+  _handleCurrentPassword(text) {
+    this.props.setPassword(text)
   }
 
   render() {
-    // console.log(Style)
+    console.log("this.props", this.props);
+    var user = this.props.user
 
     return (
-        <Image
-          source={require('../img/elements/v2loginlogoonly.png')}
-          style={styles.itemImage}
-        >
-          <View style={styles.container}>
-            <InputNormal
-              placeholder='Username'
-            />
+      <Image
+        source={require('../img/elements/v2loginlogoonly.png')}
+        style={styles.itemImage}
+      >
+        <View style={styles.container}>
+          <InputNormal
+            placeholder='Username'
+            onChangeText={this._handleCurrentUsername.bind(this)}
+            value={user.username}
+          />
 
-            <InputNormal
-              placeholder='Password'
-            />
+          <InputNormal
+            placeholder='Password'
+            onChangeText={this._handleCurrentPassword.bind(this)}
+            value={user.password}
+            secureTextEntry
+          />
 
-            <TouchableHighlight onPress={()=>this._navigate(route.home)}>
-              <Text style={Style.text1}>Login</Text>
-            </TouchableHighlight>
+          <TouchableHighlight onPress={()=>this._navigate(this.route.home)}>
+            <Text style={Style.text1}>Login</Text>
+          </TouchableHighlight>
 
-            <TouchableHighlight
-              onPress={()=>this._navigate(route.register)}
-            >
-              <Text style={{color: '#999999', fontSize: 17.2}}>Register</Text>
-            </TouchableHighlight>
-
-            <TouchableHighlight onPress={()=>this._connectDB()}>
-              <Text style={{color: '#999999', fontSize: 17.2}}>Connect</Text>
-            </TouchableHighlight>
-          </View>
-        </Image>
+          <TouchableHighlight
+            onPress={()=>this._navigate(this.route.register)}
+          >
+            <Text style={{color: '#999999', fontSize: 17.2}}>Register</Text>
+          </TouchableHighlight>
+        </View>
+      </Image>
     );
   }
 }
@@ -140,5 +128,3 @@ const styles = StyleSheet.create({
     padding: 30
   }
 });
-
-export default Login

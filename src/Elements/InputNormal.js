@@ -11,6 +11,8 @@ class InputNormal extends Component {
     style: React.PropTypes.object,
     placeholder: React.PropTypes.string,
     onChangeText: React.PropTypes.func,
+    secureTextEntry: React.PropTypes.bool,
+    keyboardType: React.PropTypes.string,
   }
 
   // chooseColor() {
@@ -66,6 +68,7 @@ class InputNormal extends Component {
         onChangeText={pr.onChangeText}
         value={value}
         keyboardType={pr.keyboardType ? pr.keyboardType : "default"}
+        secureTextEntry={pr.secureTextEntry ? true : false}
       />
     );
   }

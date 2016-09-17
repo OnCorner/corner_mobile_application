@@ -4,6 +4,7 @@ import fetchReducer from './fetchReducer'
 import inputReducer from './inputReducer'
 import imageReducer from './imageReducer'
 import itemReducer from './itemReducer'
+import sessionReducer from './sessionReducer'
 
 const rootReducer = combineReducers({
   navReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   inputReducer,
   imageReducer,
   itemReducer,
+  sessionReducer,
 })
 
 export default rootReducer

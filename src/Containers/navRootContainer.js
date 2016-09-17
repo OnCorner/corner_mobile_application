@@ -4,12 +4,22 @@ import { push, pop } from '../Actions/navActions'
 import { updateUsername, updateEmail, updateFirstName, updateLastName, updatePassword,  } from '../Actions/inputActions'
 import { itemGroup, itemQuantity, itemCondition, itemPrice, itemAcceptingOffer, itemLocation, itemMeetUp, itemShipping, itemFreeShipping, } from '../Actions/inputActions'
 import { register, storeImage, createItem, } from '../Actions/trivialActions'
+import {
+  signUp,
+  setUsername,
+  setPassword,
+  setEmail,
+  setFirstName,
+  setLastName,
+} from '../Actions/sessionActions'
 
 
 function mapStateToProps(state) {
+  console.log("instide state to props", state.sessionReducer.user);
+  state.sessionReducer.user["conner"] = "text";
   return {
     navigation: state.navReducer,
-    userInfo: state.inputReducer,
+    ...state.sessionReducer,
     image: state.imageReducer,
     itemInfo: state.itemReducer,
   }
@@ -41,5 +51,12 @@ export default connect(
     itemMeetUp: (value) => itemMeetUp(value),
     itemShipping: (value) => itemShipping(value),
     itemFreeShipping: (value) => itemFreeShipping(value),
+    //sessionActions.js - itemReducer
+    signUp: (user) => signUp(user),
+    setUsername: (text) => setUsername(text),
+    setPassword: (text) => setPassword(text),
+    setEmail: (text) => setEmail(text),
+    setFirstName: (text) => setFirstName(text),
+    setLastName: (text) => setLastName(text),
   }
 )(NavigationRoot)

@@ -10,40 +10,35 @@ import {
   Dimensions
 } from 'react-native';
 
+import Session from '../Modules/Session'
 import Interest from './Interest'
 import InputNormal from '../Elements/InputNormal'
 
 var width = Dimensions.get('window').width * .50;
 
-const route = {
-  interest: {
-    type: 'push',
-    route: {
-      key: 'interest',
-      title: 'Interest',
-      component: Interest,
-      direction: 'horizontal'
-    }
-  }
-}
-
-const currentInfo = {
-  username: '',
-  email: '',
-  firstName: '',
-  lastName: '',
-  password: '',
-}
-
-class Register extends Component {
-  constructor(){
-    super();
+export default class Register extends Component {
+  constructor(props) {
+    super(props);
+    console.log("props", props);
     // this.state = {items:[]};
+    this._signUp = this._signUp.bind(this);
     this._handleCurrentUsername = this._handleCurrentUsername.bind(this);
     this._handleCurrentEmail = this._handleCurrentEmail.bind(this);
     this._handleCurrentFirstName = this._handleCurrentFirstName.bind(this);
     this._handleCurrentLastName = this._handleCurrentLastName.bind(this);
-    this._handleCurrentPassword= this._handleCurrentPassword.bind(this);
+    this._handleCurrentPassword = this._handleCurrentPassword.bind(this);
+
+    this.route = {
+      interest: {
+        type: 'push',
+        route: {
+          key: 'interest',
+          title: 'Interest',
+          component: Interest,
+          direction: 'horizontal'
+        }
+      }
+    }
   }
 
   // _navigate(type='Normal'){
@@ -54,49 +49,49 @@ class Register extends Component {
   //   })
   // }
 
+  componentDidMount() {
+  }
+
+  _signUp(user) {
+    console.log("this.props.actions", this.props.actions);
+    this.props.signUp(user)
+    .then((newUser) => {
+      Session.user = newUser;
+      this._navigate(this.route.interest, newUser)
+    });
+  }
+
   _handleCurrentUsername(text) {
-    currentInfo.username = text
-    console.log(currentInfo)
-    this.props.actions.updateUsername(text)
+    console.log("this.props", this.props);
+    this.props.setUsername(text)
+  }
+
+  _handleCurrentPassword(text) {
+    this.props.setPassword(text)
   }
 
   _handleCurrentEmail(text) {
-    currentInfo.email = text
-    this.props.actions.updateEmail(text)
+    this.props.setEmail(text)
   }
 
   _handleCurrentFirstName(text) {
-    currentInfo.firstName = text
-    this.props.actions.updateFirstName(text)
+    this.props.setFirstName(text)
   }
 
   _handleCurrentLastName(text) {
-    currentInfo.lastName = text
-    this.props.actions.updateLastName(text)
-  }
-
-
-  _handleCurrentPassword(text) {
-    currentInfo.password = text
-    this.props.actions.updatePassword(text)
+    this.props.setLastName(text)
   }
 
   _navigate(route) {
-    console.log(currentInfo)
-    this.props.actions.registerUser(currentInfo)
+    this.props.registerUser(this.props.user)
     this.props._handleNavigate(route)
   }
 
   render() {
-    console.log('LOGGING START')
-    console.log(this.props)
-    console.log('LOGGING END')
+    console.log('this.props.actions.user', this.props.user)
 
-    var userInfo = this.props.actions.userInfo.userInfo
-
-    console.log('NEW VAR')
-    console.log(userInfo)
-    console.log('END VAR')
+    var user = this.props.user;
+    console.log("register user", user);
 
     return (
       <View style={styles.container}>
@@ -105,34 +100,35 @@ class Register extends Component {
           <InputNormal
             placeholder='Username'
             onChangeText={this._handleCurrentUsername}
-            value={userInfo.username}
-          />
-
-          <InputNormal
-            placeholder='Email'
-            onChangeText={this._handleCurrentEmail}
-            value={userInfo.email}
-          />
-
-          <InputNormal
-            placeholder='First Name'
-            onChangeText={this._handleCurrentFirstName}
-            value={userInfo.firstName}
-          />
-
-          <InputNormal
-            placeholder='Last Name'
-            onChangeText={this._handleCurrentLastName}
-            value={userInfo.lastName}
+            value={user.username}
           />
 
           <InputNormal
             placeholder='Password'
             onChangeText={this._handleCurrentPassword}
-            value={userInfo.password}
+            value={user.password}
+            secureTextEntry
           />
 
-          <TouchableHighlight onPress={()=>this._navigate(route.interest, userInfo)}>
+          <InputNormal
+            placeholder='Email'
+            onChangeText={this._handleCurrentEmail}
+            value={user.email}
+          />
+
+          <InputNormal
+            placeholder='First Name'
+            onChangeText={this._handleCurrentFirstName}
+            value={user.firstName}
+          />
+
+          <InputNormal
+            placeholder='Last Name'
+            onChangeText={this._handleCurrentLastName}
+            value={user.lastName}
+          />
+
+          <TouchableHighlight onPress={this._signUp(user)}>
             <Text style={styles.continueButton}>Continue</Text>
           </TouchableHighlight>
         </View>
@@ -179,5 +175,3 @@ const styles = StyleSheet.create({
     fontFamily: 'Helvetica Neue'
   }
 });
-
-export default Register
