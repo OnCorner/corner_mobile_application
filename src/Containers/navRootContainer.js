@@ -16,7 +16,6 @@ import {
 
 function mapStateToProps(state) {
   console.log("instide state to props", state.sessionReducer.user);
-  state.sessionReducer.user["conner"] = "text";
   return {
     navigation: state.navReducer,
     ...state.sessionReducer,

@@ -1,6 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import Session from '../Modules/Session.js';
 import {
   StyleSheet,
@@ -17,7 +18,7 @@ import Register from './Register'
 import InputNormal from '../Elements/InputNormal'
 import Style from '../Modules/Style'
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.width = Dimensions.get('window').width;
@@ -54,6 +55,10 @@ export default class Login extends Component {
     console.log("this.props", this.props);
   }
 
+  componentWillReceiveProps(newProps) {
+    console.log("newProps>>>>>>>", newProps);
+  }
+
   _navigate(route) {
     this.props._handleNavigate(route)
   }
@@ -67,7 +72,8 @@ export default class Login extends Component {
   // }
 
   _handleCurrentUsername(text) {
-    this.props.setUsername(text)
+    console.log("here", this.props);
+    this.props.dispatch(this.props.setUsername(text));
   }
 
   _handleCurrentPassword(text) {
@@ -128,3 +134,5 @@ const styles = StyleSheet.create({
     padding: 30
   }
 });
+
+export default connect()(Login)
